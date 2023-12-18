@@ -21,7 +21,7 @@ public class App extends Application {
     @Override
     public void start(Stage ventana) throws IOException {
         ventana.setTitle("ULAGOS CINEMA ULTRA CAPITALISTA");
-
+        HBox contendorH = new HBox();
         VBox contenedor = new VBox();
         Label texto1 = new Label("Hola, este el ejemplo");
         GridPane gridPane = new GridPane();
@@ -82,11 +82,15 @@ public class App extends Application {
         Button botonE5 = new Button("E5");
         GridPane.setConstraints(botonE5, 4, 4);
 //======EN ESTA SECCION PODRAS MODIFICAR LAS FUNCIONES DE LOS BOTONES DADOS=========
-        botonA1.setOnAction( e -> {System.out.println("TEST"); });
-
-
+        botonA1.setOnAction( e -> {
+            System.out.println("TEST");
+        });
+        botonA2.setOnAction( e -> {
+            System.out.println("TEST A2");
+        } );       
 
 //=====================================================================================
+        contendorH.getChildren().addAll(texto1);
         gridPane.getChildren().addAll(botonA1, botonA2, botonA3, botonA4, botonA5, botonB1, botonB2, botonB3, botonB4, botonB5, botonC1, botonC2, botonC3, botonC4, botonC5, botonD1, botonD2, botonD3, botonD4, botonD5, botonE1, botonE2, botonE3, botonE4, botonE5);
         contenedor.getChildren().addAll(texto1, gridPane);
 

@@ -1,3 +1,4 @@
+package com.ejemplo1;
 public class Compra {
     private int cantAsientos;
     private String asientos[];

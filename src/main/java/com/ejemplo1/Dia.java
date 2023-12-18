@@ -1,8 +1,9 @@
+package com.ejemplo1;
 public class Dia {
     int fecha;
     Funcion funciones[][];//[5][5]
     String peliculas[];
-    int precio;
+    int precio = 1000;
 
     public Dia(int fecha, String peliculas[], int precio){
         this.fecha = fecha;

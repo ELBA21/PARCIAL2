@@ -1,3 +1,4 @@
+package com.ejemplo1;
 public class Funcion {
     private int nroSala;
     private int sala[][]; // Declaración corregida
