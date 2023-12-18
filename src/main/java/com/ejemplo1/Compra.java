@@ -1,10 +1,12 @@
 package com.ejemplo1;
+import java.util.ArrayList;
 public class Compra {
     private int cantAsientos;
-    private String asientos[];
+    ArrayList<String> asientos = new ArrayList<>();
+
     private int costo;
 
-    public Compra(int cantAsientos, String asientos[], int costo){
+    public Compra(int cantAsientos, ArrayList<String> asientos, int costo){
         this.cantAsientos = cantAsientos;
         this.asientos = asientos;
         this.costo = costo;
@@ -16,7 +18,7 @@ public class Compra {
     public int getCantAsientos(){
         return this.cantAsientos;
     }
-    public String[] getAsientos(){
+    public ArrayList<String> getAsientos(){
         return this.asientos;
     }
 }
