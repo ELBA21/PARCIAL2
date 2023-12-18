@@ -8,9 +8,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
-
 import java.io.IOException;
-
 /**
  * JavaFX App
  */
@@ -82,12 +80,35 @@ public class App extends Application {
         Button botonE5 = new Button("E5");
         GridPane.setConstraints(botonE5, 4, 4);
 //======EN ESTA SECCION PODRAS MODIFICAR LAS FUNCIONES DE LOS BOTONES DADOS=========
-        botonA1.setOnAction( e -> {
-            System.out.println("TEST");
-        });
-        botonA2.setOnAction( e -> {
-            System.out.println("TEST A2");
-        } );       
+        botonA1.setOnAction( e -> {System.out.println("TEST A1");});
+        botonA2.setOnAction( e -> {System.out.println("TEST A2");});
+        botonA3.setOnAction( e -> {System.out.println("TEST A3");});
+        botonA4.setOnAction( e -> {System.out.println("TEST A4");}); 
+        botonA5.setOnAction( e -> {System.out.println("TEST A5");});
+
+        botonB1.setOnAction( e -> {System.out.println("TEST B1");});
+        botonB2.setOnAction( e -> {System.out.println("TEST B2");});
+        botonB3.setOnAction( e -> {System.out.println("TEST B3");});
+        botonB4.setOnAction( e -> {System.out.println("TEST B4");}); 
+        botonB5.setOnAction( e -> {System.out.println("TEST B5");});
+
+        botonC1.setOnAction( e -> {System.out.println("TEST C1");});
+        botonC2.setOnAction( e -> {System.out.println("TEST C2");});
+        botonC3.setOnAction( e -> {System.out.println("TEST C3");});
+        botonC4.setOnAction( e -> {System.out.println("TEST C4");}); 
+        botonC5.setOnAction( e -> {System.out.println("TEST C5");});
+
+        botonD1.setOnAction( e -> {System.out.println("TEST D1");});
+        botonD2.setOnAction( e -> {System.out.println("TEST D2");});
+        botonD3.setOnAction( e -> {System.out.println("TEST D3");});
+        botonD4.setOnAction( e -> {System.out.println("TEST D4");}); 
+        botonD5.setOnAction( e -> {System.out.println("TEST D5");});
+
+        botonE1.setOnAction( e -> {System.out.println("TEST E1");});
+        botonE2.setOnAction( e -> {System.out.println("TEST E2");});
+        botonE3.setOnAction( e -> {System.out.println("TEST E3");});
+        botonE4.setOnAction( e -> {System.out.println("TEST E4");}); 
+        botonE5.setOnAction( e -> {System.out.println("TEST E5");});
 
 //=====================================================================================
         contendorH.getChildren().addAll(texto1);
