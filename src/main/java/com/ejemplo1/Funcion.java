@@ -1,29 +1,28 @@
 package com.ejemplo1;
+import java.util.ArrayList;
+
 public class Funcion {
     private int nroSala;
-    private int sala[][]; // Declaración corregida
+    private int[][] sala = new int[5][5];
     private String horario;
     private String pelicula;
-    private Compra historialCompras[]; // Punto y coma añadido
+    private ArrayList<Compra> historialCompras = new ArrayList<>();
     private int ganancia;
 
-    public Funcion(int nroSala, int sala[][], String horario, String pelicula, Compra historialCompras[], int ganancia){
+    public Funcion(int nroSala, String horario, String pelicula){
         this.nroSala = nroSala;
-        this.sala = sala;
         this.horario = horario;
-        this.pelicula=pelicula;
-        this.historialCompras = historialCompras;
-        this.ganancia = ganancia;
+        this.pelicula = pelicula;
     }
-    public void actualizarSala(){
-        //a
+    public void actualizarSala(int i, int j){
+        sala[i][j] = 1;
     }
-    public void actualizarGanancia(){
-        //a
+    public void actualizarGanancia(int newSuma){
+        ganancia += newSuma;
     }
-    public void agregarCompra(){
-        //q
-    }
+    public void agregarCompra(Compra compra){
+        historialCompras.add(compra);
+    }                        
     public int getNroSala(){
         return this.nroSala;
     }
@@ -33,10 +32,10 @@ public class Funcion {
     public String getHorario(){
         return this.horario;
     }
-    public String getPelicua(){
+    public String getPelicula(){
         return this.pelicula;
     }
-    public Compra[] getHistorialCompras(){
+    public ArrayList<Compra> getHistorialCompras(){
         return this.historialCompras;
     }
     public int getGanancia(){

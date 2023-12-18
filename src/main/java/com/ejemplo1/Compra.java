@@ -1,9 +1,9 @@
 package com.ejemplo1;
 import java.util.ArrayList;
+
 public class Compra {
     private int cantAsientos;
     ArrayList<String> asientos = new ArrayList<>();
-
     private int costo;
 
     public Compra(int cantAsientos, ArrayList<String> asientos, int costo){
