@@ -25,7 +25,6 @@ public class App extends Application {
         GridPane gridPane = new GridPane();
             gridPane.setHgap(5); // Espacio horizontal entre las celdas
             gridPane.setVgap(5); // Espacio vertical entre las celdas
-
         Button botonA1 = new Button("A1");//Creacion de boton
         GridPane.setConstraints(botonA1, 0, 0); //Asignacion de boton en grid
         Button botonA2 = new Button("A2");
@@ -47,7 +46,6 @@ public class App extends Application {
         GridPane.setConstraints(botonB4, 3, 1);
         Button botonB5 = new Button("B5");
         GridPane.setConstraints(botonB5, 4, 1);
-
         Button botonC1 = new Button("C1");
         GridPane.setConstraints(botonC1, 0, 2);
         Button botonC2 = new Button("C2");
@@ -68,7 +66,6 @@ public class App extends Application {
         GridPane.setConstraints(botonD4, 3, 3);
         Button botonD5 = new Button("D5");
         GridPane.setConstraints(botonD5, 4, 3);
-
         Button botonE1 = new Button("E1");
         GridPane.setConstraints(botonE1, 0, 4);
         Button botonE2 = new Button("E2");
@@ -111,13 +108,18 @@ public class App extends Application {
         botonE5.setOnAction( e -> {System.out.println("TEST E5");});
 
 //=====================================================================================
-        contendorH.getChildren().addAll(texto1);
+        Button botonIncio = new Button("Click para Inciar");
+        contendorH.getChildren().addAll(texto1, botonIncio);
         gridPane.getChildren().addAll(botonA1, botonA2, botonA3, botonA4, botonA5, botonB1, botonB2, botonB3, botonB4, botonB5, botonC1, botonC2, botonC3, botonC4, botonC5, botonD1, botonD2, botonD3, botonD4, botonD5, botonE1, botonE2, botonE3, botonE4, botonE5);
         contenedor.getChildren().addAll(texto1, gridPane);
 
-        Scene escena = new Scene(contenedor, 500, 500);
-
-        ventana.setScene(escena);
+        Scene matrizAsiento = new Scene(contenedor, 500, 500);
+        Scene inicio = new Scene(contendorH);
+        ventana.setScene(inicio);
+        botonIncio.setOnAction( e -> {
+            ventana.setScene(matrizAsiento);
+        });
+        
         ventana.show();
     }
 
