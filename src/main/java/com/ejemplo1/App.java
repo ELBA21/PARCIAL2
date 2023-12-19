@@ -1,17 +1,21 @@
 package com.ejemplo1;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import java.io.IOException;
 /**
  * JavaFX App
  */
+
 public class App extends Application {
 
     private static Scene scene;
@@ -19,12 +23,125 @@ public class App extends Application {
     @Override
     public void start(Stage ventana) throws IOException {
         ventana.setTitle("ULAGOS CINEMA ULTRA CAPITALISTA");
-        HBox contendorH = new HBox();
         VBox contenedor = new VBox();
         Label texto1 = new Label("Hola, este el ejemplo");
         GridPane gridPane = new GridPane();
             gridPane.setHgap(5); // Espacio horizontal entre las celdas
             gridPane.setVgap(5); // Espacio vertical entre las celdas
+//VENTANA DE INICIO
+//===========================================================================
+        HBox cabezera = new HBox();
+            VBox contenedorA1 = new VBox();
+                Label espacio1 = new Label("      ");
+                Label Fecha = new Label("FECHA");
+                TextField userTextFecha = new TextField();
+                userTextFecha.setPromptText("Ingrese fecha");
+                contenedorA1.getChildren().addAll(espacio1,Fecha, userTextFecha);
+
+            VBox contenedorA2 = new VBox();
+                Label CINE = new Label("CINE");
+                CINE.setStyle("-fx-font-size: 64px; -fx-font-weight: bold;-fx-alignment: center;");
+                VBox listaPelicuas = new VBox();
+                Label ejemplo1 = new Label("Kaguya-sama movie");
+                Label ejemplo2 = new Label("EGG KING");
+                Label ejemplo3 = new Label("EGG KING RETURN!");
+                listaPelicuas.getChildren().addAll(ejemplo1, ejemplo2, ejemplo3);
+                contenedorA2.getChildren().addAll(CINE, listaPelicuas);
+
+            VBox contenedorA3 = new VBox();
+                Label espacio2 = new Label("       ");
+                Label precioT = new Label("PRECIO");
+                Label precio = new Label("3000");
+                Button botonIncio = new Button("Click para Inciar");
+                contenedorA3.getChildren().addAll(espacio2, precioT,precio, botonIncio);
+        
+            cabezera.getChildren().addAll(contenedorA1, contenedorA2, contenedorA3);
+            HBox.setMargin(botonIncio, new Insets(100,0,0,0));
+            Scene inicio = new Scene(cabezera,500,200);
+            ventana.setScene(inicio);
+//Asignacion de Peliculas
+//============================================================================
+        HBox cabezera2 = new HBox();
+            VBox sala1 = new VBox();
+                Label CinemaS1 = new Label("SALA 1");
+                CinemaS1.setStyle("-fx-font-size: 12px; -fx-font-weight: bold;");
+                Label matineS1 = new Label("MATINE");
+                TextField matineS1TextField = new TextField("Nombre pelicula");
+                Label vermutS1 = new Label("Vermut");
+                TextField vermutS1TextField = new TextField("Nombre pelicula");
+                Label vespertinoS1 = new Label("Vespertino");
+                TextField vespertinoS1TextField = new TextField("Nombre pelicula");
+                sala1.getChildren().addAll(CinemaS1, matineS1,matineS1TextField, vermutS1, vermutS1TextField, vespertinoS1, vespertinoS1TextField);
+            VBox sala2 = new VBox();
+                Label CinemaS2 = new Label("SALA 2");
+                CinemaS2.setStyle("-fx-font-size: 12px; -fx-font-weight: bold;");
+                Label matineS2 = new Label("MATINE");
+                TextField matineS2TextField = new TextField("Nombre pelicula");
+                Label vermutS2 = new Label("Vermut");
+                TextField vermutS2TextField = new TextField("Nombre pelicula");
+                Label vespertinoS2 = new Label("Vespertino");
+                TextField vespertinoS2TextField = new TextField("Nombre pelicula");
+                sala2.getChildren().addAll(CinemaS2, matineS2,matineS2TextField, vermutS2, vermutS2TextField, vespertinoS2, vespertinoS2TextField);
+
+            VBox sala3 = new VBox();
+                Label CinemaS3 = new Label("SALA 3");
+                CinemaS3.setStyle("-fx-font-size: 12px; -fx-font-weight: bold;-fx-alignment: center;");
+                Label matineS3 = new Label("MATINE");
+                TextField matineS3TextField = new TextField("Nombre pelicula");
+                Label vermutS3 = new Label("Vermut");
+                TextField vermutS3TextField = new TextField("Nombre pelicula");
+                Label vespertinoS3 = new Label("Vespertino");
+                TextField vespertinoS3TextField = new TextField("Nombre pelicula");
+                Button botonSiguiente = new Button("Siguiente");
+                sala3.getChildren().addAll(CinemaS3, matineS3,matineS3TextField, vermutS3, vermutS3TextField, vespertinoS3, vespertinoS3TextField, botonSiguiente);
+                botonSiguiente.setOnAction( e -> {
+                    System.out.println("TEST");
+                });
+        cabezera2.getChildren().addAll(sala1,sala2,sala3);
+        Scene AsignacionPeliculas = new Scene(cabezera2, 500,200);
+    botonIncio.setOnAction( e -> {
+        ventana.setScene(AsignacionPeliculas);
+    });
+//Centro de Compras
+//============================================================================
+        HBox cabezera3 = new HBox();
+            VBox BSala1 = new VBox();
+                Label cCompras = new Label("Centro de Compras");
+                cCompras.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;-fx-alignment: center;");
+                Label Matine = new Label("Matine");
+                Matine.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
+                Label Vermut = new Label("Vermut");
+                Vermut.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
+                Label Vespertino = new Label("Vespertino");
+                Vespertino.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
+                BSala1.getChildren().addAll(cCompras,Matine, Vermut, Vespertino);
+            VBox BSala2 = new VBox();
+                Label BCinemaS1 = new Label("   Sala 1");
+                Button EggKing1 = new Button("Egg King");
+                Button KaguyaSama1 = new Button(" Kaguya ");
+                Button UP1 = new Button("  UP ");
+                BSala2.getChildren().addAll(BCinemaS1, EggKing1, KaguyaSama1,UP1);
+            VBox BSala3 = new VBox();
+                Label BCinemaS2 = new Label("   Sala 2");
+                Button KaguyaSama2 = new Button(" Kaguya ");
+                Button EggKing2 = new Button("EGG KING");
+                Button UP2 = new Button(" UP ");
+                BSala3.getChildren().addAll(BCinemaS2,KaguyaSama2, EggKing2, UP2);
+            VBox BSala4 = new VBox();
+                Label BCinemaS3  = new Label("    Sala 3");
+                Button UP3 = new Button("  UP  ");
+                Button EggKing3 = new Button("EggKing");
+                Button KaguyaSama3 = new Button(" Kaguya ");
+                Button Estadisticas = new Button("Estadisticas");
+                BSala4.getChildren().addAll(BCinemaS3,UP3, EggKing3, KaguyaSama3, Estadisticas);
+
+        cabezera3.getChildren().addAll(BSala1, BSala2, BSala3, BSala4);
+    Scene centroDeCompras = new Scene(cabezera3,500, 200 );
+    botonSiguiente.setOnAction( e -> {  // Se declara accion del boton
+        ventana.setScene(centroDeCompras);
+    });
+//MATRIZ DE ASIENTOS
+//========================================================================
         Button botonA1 = new Button("A1");//Creacion de boton
         GridPane.setConstraints(botonA1, 0, 0); //Asignacion de boton en grid
         Button botonA2 = new Button("A2");
@@ -108,17 +225,33 @@ public class App extends Application {
         botonE5.setOnAction( e -> {System.out.println("TEST E5");});
 
 //=====================================================================================
-        Button botonIncio = new Button("Click para Inciar");
-        contendorH.getChildren().addAll(texto1, botonIncio);
         gridPane.getChildren().addAll(botonA1, botonA2, botonA3, botonA4, botonA5, botonB1, botonB2, botonB3, botonB4, botonB5, botonC1, botonC2, botonC3, botonC4, botonC5, botonD1, botonD2, botonD3, botonD4, botonD5, botonE1, botonE2, botonE3, botonE4, botonE5);
         contenedor.getChildren().addAll(texto1, gridPane);
-
         Scene matrizAsiento = new Scene(contenedor, 500, 500);
-        Scene inicio = new Scene(contendorH);
-        ventana.setScene(inicio);
-        botonIncio.setOnAction( e -> {
-            ventana.setScene(matrizAsiento);
-        });
+        EggKing1.setOnAction(e -> {ventana.setScene(matrizAsiento);});
+        KaguyaSama1.setOnAction(e -> {ventana.setScene(matrizAsiento);});
+        UP1.setOnAction(e -> {ventana.setScene(matrizAsiento);});
+
+        KaguyaSama2.setOnAction(e -> {ventana.setScene(matrizAsiento);});
+        EggKing2.setOnAction(e -> {ventana.setScene(matrizAsiento);});
+        UP2.setOnAction(e -> {ventana.setScene(matrizAsiento);});
+
+        UP3.setOnAction(e -> {ventana.setScene(matrizAsiento);});
+        EggKing3.setOnAction(e -> {ventana.setScene(matrizAsiento);});
+        KaguyaSama3.setOnAction(e -> {ventana.setScene(matrizAsiento);});
+
+
+
+
+
+
+
+
+
+
+
+
+
         
         ventana.show();
     }
