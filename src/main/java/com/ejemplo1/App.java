@@ -28,6 +28,7 @@ public class App extends Application {
         GridPane gridPane = new GridPane();
             gridPane.setHgap(5); // Espacio horizontal entre las celdas
             gridPane.setVgap(5); // Espacio vertical entre las celdas
+
 //VENTANA DE INICIO
 //===========================================================================
         HBox cabezera = new HBox();
@@ -102,6 +103,52 @@ public class App extends Application {
     botonIncio.setOnAction( e -> {
         ventana.setScene(AsignacionPeliculas);
     });
+//ESTADÍSTICAS
+//============================================================================
+        HBox estadisticas = new HBox();
+            VBox ESala1 = new VBox();
+                Label eCompras = new Label("Estadísticas");
+                eCompras.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;-fx-alignment: center;");
+                Label eMatine = new Label("Matine");
+                eMatine.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
+                Label eVermut = new Label("Vermut");
+                eVermut.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
+                Label eVespertino = new Label("Vespertino");
+                eVespertino.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
+                ESala1.getChildren().addAll(eCompras,eMatine, eVermut, eVespertino);
+            VBox ESala2 = new VBox();
+                Label eCompras2 = new Label("Estadísticas");
+                eCompras2.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;-fx-alignment: center;");
+                Label eMatine2 = new Label("Matine");
+                eMatine2.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
+                Label eVermut2 = new Label("Vermut");
+                eVermut2.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
+                Label eVespertino2 = new Label("Vespertino");
+                eVespertino2.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
+                ESala2.getChildren().addAll(eCompras2,eMatine2, eVermut2, eVespertino2);
+            VBox ESala3 = new VBox();
+                Label eCompras3 = new Label("Estadísticas");
+                eCompras3.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;-fx-alignment: center;");
+                Label eMatine3 = new Label("Matine");
+                eMatine3.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
+                Label eVermut3 = new Label("Vermut");
+                eVermut3.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
+                Label eVespertino3 = new Label("Vespertino");
+                eVespertino3.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
+                ESala3.getChildren().addAll(eCompras3,eMatine3, eVermut3, eVespertino3);
+            VBox ESala4 = new VBox();
+                Label eCompras4 = new Label("Estadísticas");
+                eCompras4.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;-fx-alignment: center;");
+                Label eMatine4 = new Label("Matine");
+                eMatine4.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
+                Label eVermut4 = new Label("Vermut");
+                eVermut4.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
+                Label eVespertino4 = new Label("Vespertino");
+                eVespertino4.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
+                ESala4.getChildren().addAll(eCompras4,eMatine4, eVermut4, eVespertino4);
+        estadisticas.getChildren().addAll(ESala1, ESala2, ESala3, ESala4);
+    Scene estadisticasCompra = new Scene(estadisticas,500, 200 );
+
 //Centro de Compras
 //============================================================================
         HBox cabezera3 = new HBox();
@@ -132,14 +179,18 @@ public class App extends Application {
                 Button UP3 = new Button("  UP  ");
                 Button EggKing3 = new Button("EggKing");
                 Button KaguyaSama3 = new Button(" Kaguya ");
-                Button Estadisticas = new Button("Estadisticas");
-                BSala4.getChildren().addAll(BCinemaS3,UP3, EggKing3, KaguyaSama3, Estadisticas);
+                Button botonEstadisticas = new Button("Estadisticas");
+                botonEstadisticas.setOnAction( e -> {
+                    ventana.setScene(estadisticasCompra);
+                });
+                BSala4.getChildren().addAll(BCinemaS3,UP3, EggKing3, KaguyaSama3,botonEstadisticas);
 
         cabezera3.getChildren().addAll(BSala1, BSala2, BSala3, BSala4);
     Scene centroDeCompras = new Scene(cabezera3,500, 200 );
     botonSiguiente.setOnAction( e -> {  // Se declara accion del boton
         ventana.setScene(centroDeCompras);
     });
+
 //MATRIZ DE ASIENTOS
 //========================================================================
         Button botonA1 = new Button("A1");//Creacion de boton
@@ -193,36 +244,59 @@ public class App extends Application {
         GridPane.setConstraints(botonE4, 3, 4);
         Button botonE5 = new Button("E5");
         GridPane.setConstraints(botonE5, 4, 4);
+//RESUMEN DE COMPRAS
+//========================================================================
+HBox cabecera4 = new HBox();
+    VBox VCompras = new VBox();
+        Label resumenCompras = new Label("RESUMEN DE COMPRA");
+        resumenCompras.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;-fx-alignment: center;");
+        Label rPelicula = new Label("Pelicula: XXXXX");
+        Matine.setStyle("-fx-font-size: 12px;-fx-alignment: center;");
+        Label rHora = new Label("Hora: XX:XX");
+        Matine.setStyle("-fx-font-size: 12px;-fx-alignment: center;");
+        Label rSala = new Label("Sala: XXXXX");
+        Matine.setStyle("-fx-font-size: 12px;-fx-alignment: center;");
+        Label rAsientos = new Label("Asientos: XXXXX");
+        Matine.setStyle("-fx-font-size: 12px;-fx-alignment: center;");
+        Label rFecha = new Label("Fecha: XX/XX/XXXX");
+        Matine.setStyle("-fx-font-size: 12px;-fx-alignment: center;");
+        Label rTotal = new Label("Total: $ XXXXX");
+        Matine.setStyle("-fx-font-size: 12px;-fx-alignment: center;");
+        Label graciasCompra = new Label("¡GRACIAS POR SU COMPRA!");
+        graciasCompra.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;-fx-alignment: center;");
+    VCompras.getChildren().addAll(resumenCompras,rPelicula,rHora,rSala,rAsientos,rFecha,rTotal,graciasCompra);
+cabecera4.getChildren().addAll(VCompras);
+Scene resumenDeCompras = new Scene(cabecera4,500, 200 );
 //======EN ESTA SECCION PODRAS MODIFICAR LAS FUNCIONES DE LOS BOTONES DADOS=========
-        botonA1.setOnAction( e -> {System.out.println("TEST A1");});
-        botonA2.setOnAction( e -> {System.out.println("TEST A2");});
-        botonA3.setOnAction( e -> {System.out.println("TEST A3");});
-        botonA4.setOnAction( e -> {System.out.println("TEST A4");}); 
-        botonA5.setOnAction( e -> {System.out.println("TEST A5");});
+        botonA1.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
+        botonA2.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
+        botonA3.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
+        botonA4.setOnAction( e -> {ventana.setScene(resumenDeCompras);}); 
+        botonA5.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
 
-        botonB1.setOnAction( e -> {System.out.println("TEST B1");});
-        botonB2.setOnAction( e -> {System.out.println("TEST B2");});
-        botonB3.setOnAction( e -> {System.out.println("TEST B3");});
-        botonB4.setOnAction( e -> {System.out.println("TEST B4");}); 
-        botonB5.setOnAction( e -> {System.out.println("TEST B5");});
+        botonB1.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
+        botonB2.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
+        botonB3.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
+        botonB4.setOnAction( e -> {ventana.setScene(resumenDeCompras);}); 
+        botonB5.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
 
-        botonC1.setOnAction( e -> {System.out.println("TEST C1");});
-        botonC2.setOnAction( e -> {System.out.println("TEST C2");});
-        botonC3.setOnAction( e -> {System.out.println("TEST C3");});
-        botonC4.setOnAction( e -> {System.out.println("TEST C4");}); 
-        botonC5.setOnAction( e -> {System.out.println("TEST C5");});
+        botonC1.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
+        botonC2.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
+        botonC3.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
+        botonC4.setOnAction( e -> {ventana.setScene(resumenDeCompras);}); 
+        botonC5.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
 
-        botonD1.setOnAction( e -> {System.out.println("TEST D1");});
-        botonD2.setOnAction( e -> {System.out.println("TEST D2");});
-        botonD3.setOnAction( e -> {System.out.println("TEST D3");});
-        botonD4.setOnAction( e -> {System.out.println("TEST D4");}); 
-        botonD5.setOnAction( e -> {System.out.println("TEST D5");});
+        botonD1.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
+        botonD2.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
+        botonD3.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
+        botonD4.setOnAction( e -> {ventana.setScene(resumenDeCompras);}); 
+        botonD5.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
 
-        botonE1.setOnAction( e -> {System.out.println("TEST E1");});
-        botonE2.setOnAction( e -> {System.out.println("TEST E2");});
-        botonE3.setOnAction( e -> {System.out.println("TEST E3");});
-        botonE4.setOnAction( e -> {System.out.println("TEST E4");}); 
-        botonE5.setOnAction( e -> {System.out.println("TEST E5");});
+        botonE1.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
+        botonE2.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
+        botonE3.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
+        botonE4.setOnAction( e -> {ventana.setScene(resumenDeCompras);}); 
+        botonE5.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
 
 //=====================================================================================
         gridPane.getChildren().addAll(botonA1, botonA2, botonA3, botonA4, botonA5, botonB1, botonB2, botonB3, botonB4, botonB5, botonC1, botonC2, botonC3, botonC4, botonC5, botonD1, botonD2, botonD3, botonD4, botonD5, botonE1, botonE2, botonE3, botonE4, botonE5);
