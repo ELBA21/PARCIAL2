@@ -106,47 +106,44 @@ public class App extends Application {
 //ESTADÍSTICAS
 //============================================================================
         HBox estadisticas = new HBox();
-            VBox ESala1 = new VBox();
+            VBox ESala = new VBox();
                 Label eCompras = new Label("Estadísticas");
                 eCompras.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;-fx-alignment: center;");
+                ESala.getChildren().addAll(eCompras);
+
+            VBox ESala1 = new VBox();
                 Label eMatine = new Label("Matine");
                 eMatine.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
                 Label eVermut = new Label("Vermut");
                 eVermut.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
                 Label eVespertino = new Label("Vespertino");
                 eVespertino.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
-                ESala1.getChildren().addAll(eCompras,eMatine, eVermut, eVespertino);
+                ESala1.getChildren().addAll(eMatine, eVermut, eVespertino);
             VBox ESala2 = new VBox();
-                Label eCompras2 = new Label("Estadísticas");
-                eCompras2.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;-fx-alignment: center;");
                 Label eMatine2 = new Label("Matine");
                 eMatine2.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
                 Label eVermut2 = new Label("Vermut");
                 eVermut2.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
                 Label eVespertino2 = new Label("Vespertino");
                 eVespertino2.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
-                ESala2.getChildren().addAll(eCompras2,eMatine2, eVermut2, eVespertino2);
+                ESala2.getChildren().addAll(eMatine2, eVermut2, eVespertino2);
             VBox ESala3 = new VBox();
-                Label eCompras3 = new Label("Estadísticas");
-                eCompras3.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;-fx-alignment: center;");
                 Label eMatine3 = new Label("Matine");
                 eMatine3.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
                 Label eVermut3 = new Label("Vermut");
                 eVermut3.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
                 Label eVespertino3 = new Label("Vespertino");
                 eVespertino3.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
-                ESala3.getChildren().addAll(eCompras3,eMatine3, eVermut3, eVespertino3);
+                ESala3.getChildren().addAll(eMatine3, eVermut3, eVespertino3);
             VBox ESala4 = new VBox();
-                Label eCompras4 = new Label("Estadísticas");
-                eCompras4.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;-fx-alignment: center;");
                 Label eMatine4 = new Label("Matine");
                 eMatine4.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
                 Label eVermut4 = new Label("Vermut");
                 eVermut4.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
                 Label eVespertino4 = new Label("Vespertino");
                 eVespertino4.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
-                ESala4.getChildren().addAll(eCompras4,eMatine4, eVermut4, eVespertino4);
-        estadisticas.getChildren().addAll(ESala1, ESala2, ESala3, ESala4);
+                ESala4.getChildren().addAll(eMatine4, eVermut4, eVespertino4);
+        estadisticas.getChildren().addAll(ESala,ESala1, ESala2, ESala3, ESala4);
     Scene estadisticasCompra = new Scene(estadisticas,500, 200 );
 
 //Centro de Compras
