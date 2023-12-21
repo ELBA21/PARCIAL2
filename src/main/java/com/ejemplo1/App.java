@@ -1,8 +1,13 @@
 package com.ejemplo1;
 
 import javafx.application.Application;
+//import javafx.beans.Observable;
+//import javafx.beans.value.ChangeListener;
+//import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+//import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
@@ -11,7 +16,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+
 import java.io.IOException;
+//import java.util.ArrayList;
 /**
  * JavaFX App
  */
@@ -32,11 +40,43 @@ public class App extends Application {
 //===========================================================================
         HBox cabezera = new HBox();
             VBox contenedorA1 = new VBox();
-                Label espacio1 = new Label("      ");
-                Label Fecha = new Label("FECHA");
-                TextField userTextFecha = new TextField();
-                userTextFecha.setPromptText("Ingrese fecha");
-                contenedorA1.getChildren().addAll(espacio1,Fecha, userTextFecha);
+                Label espacioa1 = new Label("      ");
+                Label espacioa2 = new Label("      ");
+                Label espacioa3 = new Label("      ");
+                Label espacioa4 = new Label("      ");
+                VBox Fechas = new VBox();
+                    Label FechaDia = new Label("Dia");
+                    ObservableList<Integer> dias = FXCollections.observableArrayList(//Creamos Array pa usarlo luego
+                        1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31);
+                    ComboBox<Integer> comboDias = new ComboBox<>(dias); //Creamos lista desplegable, que recibe el array de ahora
+                    comboDias.setPromptText("Seleccione el dia"); //El texto que sale antes de desplegar
+                    comboDias.setOnAction(e -> {
+                        int diaSeleccionado = comboDias.getSelectionModel().getSelectedItem(); //Guarda el dato de la lista en una variable YEI! 
+                        System.out.println("Selected Option: " + diaSeleccionado); //Escribe en la terminal, solo de prueba, luego llamamos un set algo
+                    });
+
+
+                    Label FechaMes = new Label("Mes");
+                    ObservableList<Integer> Mes = FXCollections.observableArrayList(
+                        1,2,3,4,5,6,7,8,9,10,11,12);
+                    ComboBox<Integer> comboMes = new ComboBox<>(Mes);
+                    comboMes.setPromptText("Selecione el Mes");
+                    comboMes.setOnAction(e ->{
+                        int mesSeleccionado = comboDias.getSelectionModel().getSelectedItem();
+                        System.out.println("Mes selecionado: " + mesSeleccionado);
+                    });
+
+                    Label FechaAño = new Label("Año");
+                    ObservableList<Integer> Años = FXCollections.observableArrayList(
+                        2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033);
+                    ComboBox<Integer> comboAño = new ComboBox<>(Años);
+                    comboAño.setPromptText("Seleccione el año");
+                    comboAño.setOnAction( e -> {
+                        int añoSeleccionado = comboAño.getSelectionModel().getSelectedItem();
+                        System.out.println("Año seleccionado: "  + añoSeleccionado);
+                    });
+                    Fechas.getChildren().addAll(FechaDia, comboDias, FechaMes, comboMes, FechaAño, comboAño);
+                contenedorA1.getChildren().addAll(espacioa1,espacioa2,espacioa3, espacioa4,Fechas);
 
             VBox contenedorA2 = new VBox();
                 Label CINE = new Label("CINE");
@@ -49,11 +89,14 @@ public class App extends Application {
                 contenedorA2.getChildren().addAll(CINE, listaPelicuas);
 
             VBox contenedorA3 = new VBox();
-                Label espacio2 = new Label("       ");
+                Label espaciob1 = new Label("      ");
+                Label espaciob2 = new Label("      ");
+                Label espaciob3 = new Label("      ");
+                Label espaciob4 = new Label("      ");
                 Label precioT = new Label("PRECIO");
                 Label precio = new Label("3000");
                 Button botonIncio = new Button("Click para Inciar");
-                contenedorA3.getChildren().addAll(espacio2, precioT,precio, botonIncio);
+                contenedorA3.getChildren().addAll(espaciob1,espaciob2, espaciob3, espaciob4, precioT,precio, botonIncio);
         
             cabezera.getChildren().addAll(contenedorA1, contenedorA2, contenedorA3);
             HBox.setMargin(botonIncio, new Insets(100,0,0,0));
@@ -66,6 +109,8 @@ public class App extends Application {
                 Label CinemaS1 = new Label("SALA 1");
                 CinemaS1.setStyle("-fx-font-size: 12px; -fx-font-weight: bold;");
                 Label matineS1 = new Label("MATINE");
+                //ComboBox<String> matineS1ComboBox = new ComboBox<>();
+                //matineS1ComboBox.getItems().addAll(Dia.getPeliculas);
                 TextField matineS1TextField = new TextField("Nombre pelicula");
                 Label vermutS1 = new Label("Vermut");
                 TextField vermutS1TextField = new TextField("Nombre pelicula");
@@ -252,10 +297,14 @@ public class App extends Application {
 
 
 
+
+
         
         ventana.show();
     }
 
+
+    //Dia dia = new Dia();
     public static void main(String[] args) {
         launch();
     }
