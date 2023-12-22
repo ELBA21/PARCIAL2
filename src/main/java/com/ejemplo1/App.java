@@ -29,6 +29,18 @@ public class App extends Application {
     private ObservableList<String> listaPeliculas = FXCollections.observableArrayList(); 
     //Esta es una mauski herramienta misteriosa que usaremos mas tarde AJOI
 
+
+    String matineS1String;
+    String vermutS1String;
+    String vespertinoS1String;
+
+    String matineS2String;
+    String vermutS2String;
+    String vespertinoS2String;
+
+    String matineS3String;
+    String vermutS3String;
+    String vespertinoS3String;
     @Override
     public void start(Stage ventana) throws IOException {
         ventana.setTitle("ULAGOS CINEMA ULTRA CAPITALISTA");
@@ -37,7 +49,23 @@ public class App extends Application {
         GridPane gridPane = new GridPane();
             gridPane.setHgap(5); // Espacio horizontal entre las celdas
             gridPane.setVgap(5); // Espacio vertical entre las celdas
+// ACA DEJARE Declarare Unos cuantos botones de la pagina de Compras
+//====================================================================
+        Button matineS1Button = new Button("");
+        Button vermutS1Button = new Button("");
+        Button vespertinoS1Button = new Button("");
 
+        Button matineS2Button = new Button("");
+        Button vermutS2Button = new Button("");
+        Button vespertinoS2Button = new Button("");
+
+        Button matineS3Button = new Button("");       
+        Button vermutS3Button = new Button("");
+        Button vespertinoS3Button = new Button("");
+
+
+
+//==================================================
 //VENTANA DE INICIO
 //===========================================================================
         HBox cabezera = new HBox();
@@ -115,36 +143,52 @@ public class App extends Application {
             ventana.setScene(inicio);
 //Asignacion de Peliculas
 //============================================================================
-
-                /*
-                 * 
-                 ComboBox<Integer> comboAño = new ComboBox<>(Años);
-                    comboAño.setPromptText("Seleccione el año");
-                    comboAño.setOnAction( e -> {
-                        int añoSeleccionado = comboAño.getSelectionModel().getSelectedItem();
-                        System.out.println("Año seleccionado: "  + añoSeleccionado);
-                    });
-                 */
         HBox cabezera2 = new HBox();
             VBox sala1 = new VBox();
                 Label CinemaS1 = new Label("SALA 1");
                 CinemaS1.setStyle("-fx-font-size: 12px; -fx-font-weight: bold;");
                 Label matineS1 = new Label("MATINE");
                 ComboBox<String> matineS1ComboBox = new ComboBox<>(listaPeliculas);
+                matineS1ComboBox.setOnAction(e->{
+                    matineS1String = matineS1ComboBox.getValue();
+                    matineS1Button.setText(matineS1String);
+                });
                 Label vermutS1 = new Label("Vermut");
                 ComboBox<String> vermutS1ComboBox = new ComboBox<>(listaPeliculas);
+                vermutS1ComboBox.setOnAction( e -> {
+                    vermutS1String = vermutS1ComboBox.getValue();
+                    vermutS1Button.setText(vermutS1String);
+                });
                 Label vespertinoS1 = new Label("Vespertino");
                 ComboBox<String> vespertinoS1ComboBox = new ComboBox<>(listaPeliculas);
+                vespertinoS1ComboBox.setOnAction( e -> {
+                    vespertinoS1String = vespertinoS1ComboBox.getValue();
+                    vespertinoS1Button.setText(vespertinoS1String);
+                });
                 sala1.getChildren().addAll(CinemaS1, matineS1,matineS1ComboBox, vermutS1, vermutS1ComboBox, vespertinoS1, vespertinoS1ComboBox);
+
+
             VBox sala2 = new VBox();
                 Label CinemaS2 = new Label("SALA 2");
                 CinemaS2.setStyle("-fx-font-size: 12px; -fx-font-weight: bold;");
                 Label matineS2 = new Label("MATINE");
                 ComboBox<String> matineS2ComboBox = new ComboBox<>(listaPeliculas);
+                matineS2ComboBox.setOnAction( e -> {
+                    matineS2String = matineS2ComboBox.getValue();
+                    matineS2Button.setText(matineS2String);
+                });
                 Label vermutS2 = new Label("Vermut");
                 ComboBox<String> vermutS2ComboBox = new ComboBox<>(listaPeliculas);
+                vermutS2ComboBox.setOnAction( e -> {
+                    vermutS2String = vermutS2ComboBox.getValue();
+                    vermutS2Button.setText(vermutS2String);
+                });
                 Label vespertinoS2 = new Label("Vespertino");
                 ComboBox<String> vespertinS2ComboBox = new ComboBox<>(listaPeliculas);
+                vespertinS2ComboBox.setOnAction( e -> {
+                    vespertinoS2String = vespertinS2ComboBox.getValue();
+                    vespertinoS2Button.setText(vespertinoS2String);
+                });
                 sala2.getChildren().addAll(CinemaS2, matineS2,matineS2ComboBox, vermutS2, vermutS2ComboBox, vespertinoS2, vespertinS2ComboBox);
 
             VBox sala3 = new VBox();
@@ -152,12 +196,25 @@ public class App extends Application {
                 CinemaS3.setStyle("-fx-font-size: 12px; -fx-font-weight: bold;-fx-alignment: center;");
                 Label matineS3 = new Label("MATINE");
                 ComboBox<String> matineS3ComboBox = new ComboBox<>(listaPeliculas);
+                matineS3ComboBox.setOnAction( e ->{
+                    matineS3String = matineS3ComboBox.getValue();
+                    matineS3Button.setText(matineS3String);
+                });
                 Label vermutS3 = new Label("Vermut");
+                Label espacioLabeldenuevo = new Label("       ");
                 ComboBox<String> vermutS3ComboBox = new ComboBox<>(listaPeliculas);
+                vermutS3ComboBox.setOnAction( e -> {
+                    vermutS3String = vermutS3ComboBox.getValue();
+                    vermutS3Button.setText(vermutS3String);
+                });
                 Label vespertinoS3 = new Label("Vespertino");
-                ComboBox<String> vespertinoS3ComboBox = new ComboBox<>();
+                ComboBox<String> vespertinoS3ComboBox = new ComboBox<>(listaPeliculas);
+                vespertinoS3ComboBox.setOnAction( e -> {
+                    vespertinoS3String = vespertinoS3ComboBox.getValue();
+                    vespertinoS3Button.setText(vespertinoS3String);
+                });
                 Button botonSiguiente = new Button("Siguiente");
-                sala3.getChildren().addAll(CinemaS3, matineS3, matineS3ComboBox, vermutS3, vermutS3ComboBox, vespertinoS3, vespertinoS3ComboBox, botonSiguiente);
+                sala3.getChildren().addAll(CinemaS3, matineS3, matineS3ComboBox, vermutS3, vermutS3ComboBox, vespertinoS3, vespertinoS3ComboBox,espacioLabeldenuevo, botonSiguiente);
                 botonSiguiente.setOnAction( e -> {
                     System.out.println("TEST");
                 });
@@ -222,18 +279,21 @@ public class App extends Application {
                 Label Vespertino = new Label("Vespertino");
                 Vespertino.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
                 BSala1.getChildren().addAll(cCompras,Matine, Vermut, Vespertino);
+
             VBox BSala2 = new VBox();
                 Label BCinemaS1 = new Label("   Sala 1");
-                Button EggKing1 = new Button("Egg King");
-                Button KaguyaSama1 = new Button(" Kaguya ");
-                Button UP1 = new Button("  UP ");
-                BSala2.getChildren().addAll(BCinemaS1, EggKing1, KaguyaSama1,UP1);
+                Button EggKing1 = new Button("Matine");
+                Button KaguyaSama1 = new Button(" Vermut ");
+                Button UP1 = new Button("Vespertino");
+                BSala2.getChildren().addAll(BCinemaS1, matineS1Button, vermutS1Button,vespertinoS1Button);
+
             VBox BSala3 = new VBox();
                 Label BCinemaS2 = new Label("   Sala 2");
                 Button KaguyaSama2 = new Button(" Kaguya ");
                 Button EggKing2 = new Button("EGG KING");
                 Button UP2 = new Button(" UP ");
-                BSala3.getChildren().addAll(BCinemaS2,KaguyaSama2, EggKing2, UP2);
+                BSala3.getChildren().addAll(BCinemaS2,matineS2Button, vermutS2Button, vespertinoS2Button);
+
             VBox BSala4 = new VBox();
                 Label BCinemaS3  = new Label("    Sala 3");
                 Button UP3 = new Button("  UP  ");
@@ -243,7 +303,7 @@ public class App extends Application {
                 botonEstadisticas.setOnAction( e -> {
                     ventana.setScene(estadisticasCompra);
                 });
-                BSala4.getChildren().addAll(BCinemaS3,UP3, EggKing3, KaguyaSama3,botonEstadisticas);
+                BSala4.getChildren().addAll(BCinemaS3,matineS3Button, vermutS3Button, vespertinoS3Button,botonEstadisticas);
 
         cabezera3.getChildren().addAll(BSala1, BSala2, BSala3, BSala4);
     Scene centroDeCompras = new Scene(cabezera3,500, 200 );
