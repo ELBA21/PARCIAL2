@@ -10,8 +10,11 @@ import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Label;
+//import javafx.scene.control.ListCell;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 
@@ -23,6 +26,8 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
+    private ObservableList<String> listaPeliculas = FXCollections.observableArrayList(); 
+    //Esta es una mauski herramienta misteriosa que usaremos mas tarde AJOI
 
     @Override
     public void start(Stage ventana) throws IOException {
@@ -32,6 +37,7 @@ public class App extends Application {
         GridPane gridPane = new GridPane();
             gridPane.setHgap(5); // Espacio horizontal entre las celdas
             gridPane.setVgap(5); // Espacio vertical entre las celdas
+
 //VENTANA DE INICIO
 //===========================================================================
         HBox cabezera = new HBox();
@@ -77,12 +83,21 @@ public class App extends Application {
             VBox contenedorA2 = new VBox();
                 Label CINE = new Label("CINE");
                 CINE.setStyle("-fx-font-size: 64px; -fx-font-weight: bold;-fx-alignment: center;");
-                VBox listaPelicuas = new VBox();
-                Label ejemplo1 = new Label("Kaguya-sama movie");
-                Label ejemplo2 = new Label("EGG KING");
-                Label ejemplo3 = new Label("EGG KING RETURN!");
-                listaPelicuas.getChildren().addAll(ejemplo1, ejemplo2, ejemplo3);
-                contenedorA2.getChildren().addAll(CINE, listaPelicuas);
+                VBox cajalistaPeliculas = new VBox();
+                Button agregarALaLista = new Button("AGREGAR!");
+                TextField agregadorDePeliculas = new TextField("Ingrese el nombre de su pelicula :V");
+                ListView<String> listView = new ListView<>(listaPeliculas);
+                agregarALaLista.setOnAction(e -> {
+                    String peliAux = agregadorDePeliculas.getText();
+                    if(peliAux.isEmpty()){
+                        // Agregar un stage
+                    } else {
+                        listaPeliculas.add(peliAux);
+                        agregadorDePeliculas.clear();
+                    }
+                });
+                cajalistaPeliculas.getChildren().addAll(agregadorDePeliculas, agregarALaLista, listView);
+                contenedorA2.getChildren().addAll(CINE, cajalistaPeliculas);
 
             VBox contenedorA3 = new VBox();
                 Label espaciob1 = new Label("      ");
@@ -100,39 +115,49 @@ public class App extends Application {
             ventana.setScene(inicio);
 //Asignacion de Peliculas
 //============================================================================
+
+                /*
+                 * 
+                 ComboBox<Integer> comboAño = new ComboBox<>(Años);
+                    comboAño.setPromptText("Seleccione el año");
+                    comboAño.setOnAction( e -> {
+                        int añoSeleccionado = comboAño.getSelectionModel().getSelectedItem();
+                        System.out.println("Año seleccionado: "  + añoSeleccionado);
+                    });
+                 */
         HBox cabezera2 = new HBox();
             VBox sala1 = new VBox();
                 Label CinemaS1 = new Label("SALA 1");
                 CinemaS1.setStyle("-fx-font-size: 12px; -fx-font-weight: bold;");
                 Label matineS1 = new Label("MATINE");
-                TextField matineS1TextField = new TextField("Nombre pelicula");
+                ComboBox<String> matineS1ComboBox = new ComboBox<>(listaPeliculas);
                 Label vermutS1 = new Label("Vermut");
-                TextField vermutS1TextField = new TextField("Nombre pelicula");
+                ComboBox<String> vermutS1ComboBox = new ComboBox<>(listaPeliculas);
                 Label vespertinoS1 = new Label("Vespertino");
-                TextField vespertinoS1TextField = new TextField("Nombre pelicula");
-                sala1.getChildren().addAll(CinemaS1, matineS1,matineS1TextField, vermutS1, vermutS1TextField, vespertinoS1, vespertinoS1TextField);
+                ComboBox<String> vespertinoS1ComboBox = new ComboBox<>(listaPeliculas);
+                sala1.getChildren().addAll(CinemaS1, matineS1,matineS1ComboBox, vermutS1, vermutS1ComboBox, vespertinoS1, vespertinoS1ComboBox);
             VBox sala2 = new VBox();
                 Label CinemaS2 = new Label("SALA 2");
                 CinemaS2.setStyle("-fx-font-size: 12px; -fx-font-weight: bold;");
                 Label matineS2 = new Label("MATINE");
-                TextField matineS2TextField = new TextField("Nombre pelicula");
+                ComboBox<String> matineS2ComboBox = new ComboBox<>(listaPeliculas);
                 Label vermutS2 = new Label("Vermut");
-                TextField vermutS2TextField = new TextField("Nombre pelicula");
+                ComboBox<String> vermutS2ComboBox = new ComboBox<>(listaPeliculas);
                 Label vespertinoS2 = new Label("Vespertino");
-                TextField vespertinoS2TextField = new TextField("Nombre pelicula");
-                sala2.getChildren().addAll(CinemaS2, matineS2,matineS2TextField, vermutS2, vermutS2TextField, vespertinoS2, vespertinoS2TextField);
+                ComboBox<String> vespertinS2ComboBox = new ComboBox<>(listaPeliculas);
+                sala2.getChildren().addAll(CinemaS2, matineS2,matineS2ComboBox, vermutS2, vermutS2ComboBox, vespertinoS2, vespertinS2ComboBox);
 
             VBox sala3 = new VBox();
                 Label CinemaS3 = new Label("SALA 3");
                 CinemaS3.setStyle("-fx-font-size: 12px; -fx-font-weight: bold;-fx-alignment: center;");
                 Label matineS3 = new Label("MATINE");
-                TextField matineS3TextField = new TextField("Nombre pelicula");
+                ComboBox<String> matineS3ComboBox = new ComboBox<>(listaPeliculas);
                 Label vermutS3 = new Label("Vermut");
-                TextField vermutS3TextField = new TextField("Nombre pelicula");
+                ComboBox<String> vermutS3ComboBox = new ComboBox<>(listaPeliculas);
                 Label vespertinoS3 = new Label("Vespertino");
-                TextField vespertinoS3TextField = new TextField("Nombre pelicula");
+                ComboBox<String> vespertinoS3ComboBox = new ComboBox<>();
                 Button botonSiguiente = new Button("Siguiente");
-                sala3.getChildren().addAll(CinemaS3, matineS3,matineS3TextField, vermutS3, vermutS3TextField, vespertinoS3, vespertinoS3TextField, botonSiguiente);
+                sala3.getChildren().addAll(CinemaS3, matineS3, matineS3ComboBox, vermutS3, vermutS3ComboBox, vespertinoS3, vespertinoS3ComboBox, botonSiguiente);
                 botonSiguiente.setOnAction( e -> {
                     System.out.println("TEST");
                 });
@@ -228,56 +253,59 @@ public class App extends Application {
 
 //MATRIZ DE ASIENTOS
 //========================================================================
-        Button botonA1 = new Button("A1");//Creacion de boton
-        GridPane.setConstraints(botonA1, 0, 0); //Asignacion de boton en grid
-        Button botonA2 = new Button("A2");
+        ToggleButton botonA1 = new ToggleButton("A1");//Creacion de boton
+        GridPane.setConstraints(botonA1, 0, 0); //Asignacion de boton en gridToggleButton
+        ToggleButton botonA2 = new ToggleButton("A2");
         GridPane.setConstraints(botonA2, 1, 0);
-        Button botonA3 = new Button("A3");
+        ToggleButton botonA3 = new ToggleButton("A3");
         GridPane.setConstraints(botonA3, 2, 0);
-        Button botonA4 = new Button("A4");
+        ToggleButton botonA4 = new ToggleButton("A4");
         GridPane.setConstraints(botonA4, 3, 0);
-        Button botonA5 = new Button("A5");
+        ToggleButton botonA5 = new ToggleButton("A5");
         GridPane.setConstraints(botonA5, 4, 0);
 
-        Button botonB1 = new Button("B1");
+        ToggleButton botonB1 = new ToggleButton("B1");
         GridPane.setConstraints(botonB1, 0, 1);
-        Button botonB2 = new Button("B2");
+        ToggleButton botonB2 = new ToggleButton("B2");
         GridPane.setConstraints(botonB2, 1, 1);
-        Button botonB3 = new Button("B3");
+        ToggleButton botonB3 = new ToggleButton("B3");
         GridPane.setConstraints(botonB3, 2, 1);
-        Button botonB4 = new Button("B4");
+        ToggleButton botonB4 = new ToggleButton("B4");
         GridPane.setConstraints(botonB4, 3, 1);
-        Button botonB5 = new Button("B5");
+        ToggleButton botonB5 = new ToggleButton("B5");
         GridPane.setConstraints(botonB5, 4, 1);
-        Button botonC1 = new Button("C1");
+
+        ToggleButton botonC1 = new ToggleButton("C1");
         GridPane.setConstraints(botonC1, 0, 2);
-        Button botonC2 = new Button("C2");
+        ToggleButton botonC2 = new ToggleButton("C2");
         GridPane.setConstraints(botonC2, 1, 2);
-        Button botonC3 = new Button("C3");
+        ToggleButton botonC3 = new ToggleButton("C3");
         GridPane.setConstraints(botonC3, 2, 2);
-        Button botonC4 = new Button("C4");
+        ToggleButton botonC4 = new ToggleButton("C4");
         GridPane.setConstraints(botonC4, 3, 2);
-        Button botonC5 = new Button("C5");
+        ToggleButton botonC5 = new ToggleButton("C5");
         GridPane.setConstraints(botonC5, 4, 2);
-        Button botonD1 = new Button("D1");
+
+        ToggleButton botonD1 = new ToggleButton("D1");
         GridPane.setConstraints(botonD1, 0, 3);
-        Button botonD2 = new Button("D2");
+        ToggleButton botonD2 = new ToggleButton("D2");
         GridPane.setConstraints(botonD2, 1, 3);
-        Button botonD3 = new Button("D3");
+        ToggleButton botonD3 = new ToggleButton("D3");
         GridPane.setConstraints(botonD3, 2, 3);
-        Button botonD4 = new Button("D4");
+        ToggleButton botonD4 = new ToggleButton("D4");
         GridPane.setConstraints(botonD4, 3, 3);
-        Button botonD5 = new Button("D5");
+        ToggleButton botonD5 = new ToggleButton("D5");
         GridPane.setConstraints(botonD5, 4, 3);
-        Button botonE1 = new Button("E1");
+        
+        ToggleButton botonE1 = new ToggleButton("E1");
         GridPane.setConstraints(botonE1, 0, 4);
-        Button botonE2 = new Button("E2");
+        ToggleButton botonE2 = new ToggleButton("E2");
         GridPane.setConstraints(botonE2, 1, 4);
-        Button botonE3 = new Button("E3");
+        ToggleButton botonE3 = new ToggleButton("E3");
         GridPane.setConstraints(botonE3, 2, 4);
-        Button botonE4 = new Button("E4");
+        ToggleButton botonE4 = new ToggleButton("E4");
         GridPane.setConstraints(botonE4, 3, 4);
-        Button botonE5 = new Button("E5");
+        ToggleButton botonE5 = new ToggleButton("E5");
         GridPane.setConstraints(botonE5, 4, 4);
 //RESUMEN DE COMPRAS
 //========================================================================
@@ -303,40 +331,193 @@ HBox cabecera4 = new HBox();
 cabecera4.getChildren().addAll(VCompras);
 Scene resumenDeCompras = new Scene(cabecera4,500, 200 );
 //======EN ESTA SECCION PODRAS MODIFICAR LAS FUNCIONES DE LOS BOTONES DADOS=========
-        botonA1.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
-        botonA2.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
-        botonA3.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
-        botonA4.setOnAction( e -> {ventana.setScene(resumenDeCompras);}); 
-        botonA5.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
+        botonA1.setOnAction( a -> {
+            if(botonA1.isSelected()){
+                System.out.println("A1 Seleccionado");
+            } else {
+                System.out.println("A1 Sin seleccionar");
+            }
+        });
+        botonA2.setOnAction( a -> {
+            if(botonA2.isSelected()){
+                System.out.println("A2 Seleccionado");
+            } else {
+                System.out.println("A2 Sin seleccionar");
+            }
+        });
+        botonA3.setOnAction( a -> {
+            if(botonA3.isSelected()){
+                System.out.println("A3 Seleccionado");
+            } else {
+                System.out.println("A3 Sin seleccionar");
+            }
+        });
+        botonA4.setOnAction( a -> {
+            if(botonA4.isSelected()){
+                System.out.println("A3 Seleccionado");
+            } else {
+                System.out.println("A3 Sin seleccionar");
+            }
+        });
+        botonA5.setOnAction( a -> {
+            if(botonA5.isSelected()){
+                System.out.println("A3 Seleccionado");
+            } else {
+                System.out.println("A3 Sin seleccionar");
+            }
+        });
+//================ACA HAY BOTONES DE LA HILERA 'B'================
+        botonB1.setOnAction( a -> {
+            if(botonB1.isSelected()){
+                System.out.println("B1 Seleccionado");
+            } else {
+                System.out.println("B1 Sin seleccionar");
+            }
+        });
+        botonB2.setOnAction( a -> {
+            if(botonB2.isSelected()){
+                System.out.println("B2 Seleccionado");
+            } else {
+                System.out.println("B2 Sin seleccionar");
+            }
+        });
+        botonB3.setOnAction( a -> {
+            if(botonB3.isSelected()){
+                System.out.println("B3 Seleccionado");
+            } else {
+                System.out.println("B3 Sin seleccionar");
+            }
+        });
+        botonB4.setOnAction( a -> {
+            if(botonB4.isSelected()){
+                System.out.println("B4 Seleccionado");
+            } else {
+                System.out.println("B4 Sin seleccionar");
+            }
+        });
+        botonB5.setOnAction( a -> {
+            if(botonB5.isSelected()){
+                System.out.println("B5 Seleccionado");
+            } else {
+                System.out.println("B5 Sin seleccionar");
+            }
+        });
 
-        botonB1.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
-        botonB2.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
-        botonB3.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
-        botonB4.setOnAction( e -> {ventana.setScene(resumenDeCompras);}); 
-        botonB5.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
+//============Aca estan los botones de la hilera 'B'==============
+        botonC1.setOnAction( e -> {
+            if(botonC1.isSelected()){
+                System.out.println("C1 Seleccionado");
+            }else {
+                System.out.println("C1 No selec");
+            }
+        });
+        botonC2.setOnAction( e -> {
+            if(botonC2.isSelected()){
+                System.out.println("C2 Seleccionado");
+            } else {
+                System.out.println("C2 No Selec");
+            }
+        });
+        botonC3.setOnAction( e -> {
+            if(botonC3.isSelected()){
+                System.out.println("C3 Selec");
+            } else {
+                System.out.println("C3 No Selec");
+            }
+        });
+        botonC4.setOnAction( e -> {
+            if(botonC4.isSelected()){
+                System.out.println("C4 SELEC");
+            } else {
+                System.out.println("C4 NO SELEC");
+            }
+        }); 
+        botonC5.setOnAction( e -> {
+            if(botonC5.isSelected()){
+                System.out.println("C5 SELEC");
+            } else {
+                System.out.println("C5 No Selec");
+            }
+        });
+// =========== ACA ESTAN LOS DE LA HILERA  'D'=========
+        botonD1.setOnAction( e -> {
+            if(botonD1.isSelected()){
+                System.out.println("D1 SELEC");
+            } else{
+                System.out.println("D1 NO SELEC"); 
+            }
+        });
+        botonD2.setOnAction( e -> {
+            if(botonD2.isSelected()){
+                System.out.println("D2 SELEC"); 
+            } else {
+                System.out.println("D2 NO SELEC"); 
+            }
 
-        botonC1.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
-        botonC2.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
-        botonC3.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
-        botonC4.setOnAction( e -> {ventana.setScene(resumenDeCompras);}); 
-        botonC5.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
+        });
+        botonD3.setOnAction( e -> {
+            if(botonD3.isSelected()){
+                System.out.println("D3 SELEC"); 
+            } else {
+                System.out.println("D3 No Selec"); 
+            }
+        });
+        botonD4.setOnAction( e -> {
+            if(botonD4.isSelected()){
+                System.out.println("D4 SELEC"); 
+            } else{
+                System.out.println("D4 No selec"); 
+            }
 
-        botonD1.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
-        botonD2.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
-        botonD3.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
-        botonD4.setOnAction( e -> {ventana.setScene(resumenDeCompras);}); 
-        botonD5.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
-
-        botonE1.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
-        botonE2.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
-        botonE3.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
-        botonE4.setOnAction( e -> {ventana.setScene(resumenDeCompras);}); 
-        botonE5.setOnAction( e -> {ventana.setScene(resumenDeCompras);});
+        }); 
+        botonD5.setOnAction( e -> {
+            if(botonD5.isSelected()){
+                System.out.println("D5 SELEC");
+            } else{
+                System.out.println("D5 NO SELEC"); 
+            }
+        });
+// =============== ACA ESTAN LOS DE LA HILERA 'E' =======
+        botonE1.setOnAction( e -> {
+            if(botonE1.isSelected()){
+                System.out.println("E1 SELEC"); 
+            } else {
+                System.out.println("E1 NO SELEC"); 
+            }
+        });
+        botonE2.setOnAction( e -> {
+            if(botonE2.isSelected()){
+                System.out.println("E1 SELEC"); 
+            } else {
+                System.out.println("E1 No selec"); 
+            }
+        });
+        botonE3.setOnAction( e -> {
+            if(botonE3.isSelected()){
+                System.out.println("E3 SELEC");
+            } else {
+                System.out.println("E3 NO SELEC");
+            }
+        });
+        botonE4.setOnAction( e -> {
+            if(botonE4.isSelected()){
+                System.out.println("E4 SELEC");
+            } else {
+                System.out.println("E4 NO SELEC");
+            }
+        }); 
+        botonE5.setOnAction( e -> {
+            if(botonE5.isSelected()){
+                System.out.println("E5 SELEC");
+            } else {
+                System.out.println("E5 No Selec");
+            }
+        });
 
 //=====================================================================================
         gridPane.getChildren().addAll(botonA1, botonA2, botonA3, botonA4, botonA5, botonB1, botonB2, botonB3, botonB4, botonB5, botonC1, botonC2, botonC3, botonC4, botonC5, botonD1, botonD2, botonD3, botonD4, botonD5, botonE1, botonE2, botonE3, botonE4, botonE5);
         contenedor.getChildren().addAll(texto1, gridPane);
-        Scene matrizAsiento = new Scene(contenedor, 500, 500);
+        Scene matrizAsiento = new Scene(contenedor, 1000, 600);
         EggKing1.setOnAction(e -> {ventana.setScene(matrizAsiento);});
         KaguyaSama1.setOnAction(e -> {ventana.setScene(matrizAsiento);});
         UP1.setOnAction(e -> {ventana.setScene(matrizAsiento);});
