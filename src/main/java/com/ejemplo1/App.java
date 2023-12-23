@@ -27,22 +27,15 @@ public class App extends Application {
 
     private static Scene scene;
     private ObservableList<String> listaPeliculas = FXCollections.observableArrayList(); 
-    //Esta es una mauski herramienta misteriosa que usaremos mas tarde AJOI
+    //Esta es una mauski herramienta misteriosa que usaremos mas tarde AJ
+    int Fecha;
+    String[][] peliculas;
+    int Precio;
 
-
-    String matineS1String;
-    String vermutS1String;
-    String vespertinoS1String;
-
-    String matineS2String;
-    String vermutS2String;
-    String vespertinoS2String;
-
-    String matineS3String;
-    String vermutS3String;
-    String vespertinoS3String;
     @Override
     public void start(Stage ventana) throws IOException {
+        String[][] peliculas = new String[3][3];
+        Integer[] Fecha = new Integer[3];
         ventana.setTitle("ULAGOS CINEMA ULTRA CAPITALISTA");
         VBox contenedor = new VBox();
         Label texto1 = new Label("Hola, este el ejemplo");
@@ -79,6 +72,9 @@ public class App extends Application {
                     ObservableList<Integer> dias = FXCollections.observableArrayList(//Creamos Array pa usarlo luego
                         1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31);
                     ComboBox<Integer> comboDias = new ComboBox<>(dias); //Creamos lista desplegable, que recibe el array de ahora
+                    comboDias.setOnAction( e -> {
+                        Fecha[0] = comboDias.getValue();
+                    });
                     comboDias.setPromptText("Seleccione el dia"); //El texto que sale antes de desplegar
                     comboDias.setOnAction(e -> {
                         int diaSeleccionado = comboDias.getSelectionModel().getSelectedItem(); //Guarda el dato de la lista en una variable YEI! 
@@ -150,20 +146,20 @@ public class App extends Application {
                 Label matineS1 = new Label("MATINE");
                 ComboBox<String> matineS1ComboBox = new ComboBox<>(listaPeliculas);
                 matineS1ComboBox.setOnAction(e->{
-                    matineS1String = matineS1ComboBox.getValue();
-                    matineS1Button.setText(matineS1String);
+                    peliculas[0][0] = matineS1ComboBox.getValue();
+                    matineS1Button.setText(peliculas[0][0]);
                 });
                 Label vermutS1 = new Label("Vermut");
                 ComboBox<String> vermutS1ComboBox = new ComboBox<>(listaPeliculas);
                 vermutS1ComboBox.setOnAction( e -> {
-                    vermutS1String = vermutS1ComboBox.getValue();
-                    vermutS1Button.setText(vermutS1String);
+                    peliculas[0][1] = vermutS1ComboBox.getValue();
+                    vermutS1Button.setText(peliculas[0][1]);
                 });
                 Label vespertinoS1 = new Label("Vespertino");
                 ComboBox<String> vespertinoS1ComboBox = new ComboBox<>(listaPeliculas);
                 vespertinoS1ComboBox.setOnAction( e -> {
-                    vespertinoS1String = vespertinoS1ComboBox.getValue();
-                    vespertinoS1Button.setText(vespertinoS1String);
+                    peliculas[0][2] = vespertinoS1ComboBox.getValue();
+                    vespertinoS1Button.setText(peliculas[0][1]);
                 });
                 sala1.getChildren().addAll(CinemaS1, matineS1,matineS1ComboBox, vermutS1, vermutS1ComboBox, vespertinoS1, vespertinoS1ComboBox);
 
@@ -174,20 +170,20 @@ public class App extends Application {
                 Label matineS2 = new Label("MATINE");
                 ComboBox<String> matineS2ComboBox = new ComboBox<>(listaPeliculas);
                 matineS2ComboBox.setOnAction( e -> {
-                    matineS2String = matineS2ComboBox.getValue();
-                    matineS2Button.setText(matineS2String);
+                    peliculas[1][0] = matineS2ComboBox.getValue();
+                    matineS2Button.setText(peliculas[1][0]);
                 });
                 Label vermutS2 = new Label("Vermut");
                 ComboBox<String> vermutS2ComboBox = new ComboBox<>(listaPeliculas);
                 vermutS2ComboBox.setOnAction( e -> {
-                    vermutS2String = vermutS2ComboBox.getValue();
-                    vermutS2Button.setText(vermutS2String);
+                    peliculas[1][1] = vermutS2ComboBox.getValue();
+                    vermutS2Button.setText(peliculas[1][1]);
                 });
                 Label vespertinoS2 = new Label("Vespertino");
                 ComboBox<String> vespertinS2ComboBox = new ComboBox<>(listaPeliculas);
                 vespertinS2ComboBox.setOnAction( e -> {
-                    vespertinoS2String = vespertinS2ComboBox.getValue();
-                    vespertinoS2Button.setText(vespertinoS2String);
+                    peliculas[1][2] = vespertinS2ComboBox.getValue();
+                    vespertinoS2Button.setText(peliculas[1][2]);
                 });
                 sala2.getChildren().addAll(CinemaS2, matineS2,matineS2ComboBox, vermutS2, vermutS2ComboBox, vespertinoS2, vespertinS2ComboBox);
 
@@ -197,21 +193,21 @@ public class App extends Application {
                 Label matineS3 = new Label("MATINE");
                 ComboBox<String> matineS3ComboBox = new ComboBox<>(listaPeliculas);
                 matineS3ComboBox.setOnAction( e ->{
-                    matineS3String = matineS3ComboBox.getValue();
-                    matineS3Button.setText(matineS3String);
+                    peliculas[2][0] = matineS3ComboBox.getValue();
+                    matineS3Button.setText(peliculas[2][0]);
                 });
                 Label vermutS3 = new Label("Vermut");
                 Label espacioLabeldenuevo = new Label("       ");
                 ComboBox<String> vermutS3ComboBox = new ComboBox<>(listaPeliculas);
                 vermutS3ComboBox.setOnAction( e -> {
-                    vermutS3String = vermutS3ComboBox.getValue();
-                    vermutS3Button.setText(vermutS3String);
+                    peliculas[2][1] = vermutS3ComboBox.getValue();
+                    vermutS3Button.setText(peliculas[2][1]);
                 });
                 Label vespertinoS3 = new Label("Vespertino");
                 ComboBox<String> vespertinoS3ComboBox = new ComboBox<>(listaPeliculas);
                 vespertinoS3ComboBox.setOnAction( e -> {
-                    vespertinoS3String = vespertinoS3ComboBox.getValue();
-                    vespertinoS3Button.setText(vespertinoS3String);
+                    peliculas[2][2] = vespertinoS3ComboBox.getValue();
+                    vespertinoS3Button.setText(peliculas[2][2]);
                 });
                 Button botonSiguiente = new Button("Siguiente");
                 sala3.getChildren().addAll(CinemaS3, matineS3, matineS3ComboBox, vermutS3, vermutS3ComboBox, vespertinoS3, vespertinoS3ComboBox,espacioLabeldenuevo, botonSiguiente);

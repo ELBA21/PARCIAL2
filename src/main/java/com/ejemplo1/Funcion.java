@@ -14,8 +14,11 @@ public class Funcion {
         this.horario = horario;
         this.pelicula = pelicula;
     }
-    public void actualizarSala(int i, int j){
+    public void usarAsiento(int i, int j){
         sala[i][j] = 1;
+    }
+    public void noUsarAsiento(int i, int j){
+        sala[i][j] = 0;
     }
     public void actualizarGanancia(int newSuma){
         ganancia += newSuma;
