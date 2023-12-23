@@ -309,6 +309,16 @@ public class App extends Application {
 
 //MATRIZ DE ASIENTOS
 //========================================================================
+        String[] filitas ={"A","B","C","D","E"};
+        ToggleButton[][] asientitos = new ToggleButton[5][5];
+        int i,j;
+        for(i=0; i<5; i++){
+            for(j=0; j<5; j++){
+                asientitos[i][j] = new ToggleButton(filitas[i]+(j+1));
+                GridPane.setConstraints(asientitos[i][j], j, i);
+            }
+        }
+        /* 
         ToggleButton botonA1 = new ToggleButton("A1");//Creacion de boton
         GridPane.setConstraints(botonA1, 0, 0); //Asignacion de boton en gridToggleButton
         ToggleButton botonA2 = new ToggleButton("A2");
@@ -362,7 +372,7 @@ public class App extends Application {
         ToggleButton botonE4 = new ToggleButton("E4");
         GridPane.setConstraints(botonE4, 3, 4);
         ToggleButton botonE5 = new ToggleButton("E5");
-        GridPane.setConstraints(botonE5, 4, 4);
+        GridPane.setConstraints(botonE5, 4, 4); */
 //RESUMEN DE COMPRAS
 //========================================================================
 HBox cabecera4 = new HBox();
@@ -386,7 +396,20 @@ HBox cabecera4 = new HBox();
     VCompras.getChildren().addAll(resumenCompras,rPelicula,rHora,rSala,rAsientos,rFecha,rTotal,graciasCompra);
 cabecera4.getChildren().addAll(VCompras);
 Scene resumenDeCompras = new Scene(cabecera4,500, 200 );
-//======EN ESTA SECCION PODRAS MODIFICAR LAS FUNCIONES DE LOS BOTONES DADOS=========
+//======EN ESTA SECCION PODRAS MODIFICAR LAS FUNCIONES DE LOS BOTONES DADOS=======
+        for(i=0; i<5; i++){
+            for(j=0; j<5; j++){
+                asientitos[i][j].setOnAction( a -> {
+                    if(asientitos[i][j].isSelected()){
+                        System.out.println(filitas[i]+(j+1)+" Seleccionado");
+                    } else {
+                        System.out.println(filitas[i]+(j+1)+" Sin seleccionar");
+                    }
+                });
+            }
+        }
+        
+        /* 
         botonA1.setOnAction( a -> {
             if(botonA1.isSelected()){
                 System.out.println("A1 Seleccionado");
@@ -568,7 +591,7 @@ Scene resumenDeCompras = new Scene(cabecera4,500, 200 );
             } else {
                 System.out.println("E5 No Selec");
             }
-        });
+        }); */
 
 //=====================================================================================
         gridPane.getChildren().addAll(botonA1, botonA2, botonA3, botonA4, botonA5, botonB1, botonB2, botonB3, botonB4, botonB5, botonC1, botonC2, botonC3, botonC4, botonC5, botonD1, botonD2, botonD3, botonD4, botonD5, botonE1, botonE2, botonE3, botonE4, botonE5);
