@@ -44,6 +44,7 @@ public class App extends Application {
             gridPane.setVgap(5); // Espacio vertical entre las celdas
 // ACA DEJARE Declarare Unos cuantos botones de la pagina de Compras
 //====================================================================
+        Button[][] salasHorariosButton = new Button[3][3];
         Button matineS1Button = new Button("");
         Button vermutS1Button = new Button("");
         Button vespertinoS1Button = new Button("");
@@ -278,6 +279,9 @@ public class App extends Application {
 
             VBox BSala2 = new VBox();
                 Label BCinemaS1 = new Label("   Sala 1");
+                GridPane salaBotonesGridPane = new GridPane();
+                    salaBotonesGridPane.setHgap(3);
+                    salaBotonesGridPane.setVgap(3);
                 BSala2.getChildren().addAll(BCinemaS1, matineS1Button, vermutS1Button,vespertinoS1Button);
 
             VBox BSala3 = new VBox();
