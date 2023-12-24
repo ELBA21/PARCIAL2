@@ -141,52 +141,84 @@ public class App extends Application {
 //Asignacion de Peliculas
 //============================================================================
         HBox cabezera2 = new HBox();
-       //nuronyan hizo esto
-            VBox horariosN = new VBox();
-                Label vacioN2 = new Label("         "); //waos esto es estupido, por que no puedo usar el mismo objeto en dos cosas diferentes?
-                Label horario1N = new Label("Matine");
-                horario1N.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
-                
-                Label horario2N = new Label("Vermut");
-                horario2N.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
-                
-                Label horario3N = new Label("Vespertino");
-                horario3N.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
-                Label vacioN3 = new Label(" ");
-                Label vacioN4 = new Label(" ");
-                Label vacioN5 = new Label(" ");
-                //
+            VBox sala1 = new VBox();
+                Label CinemaS1 = new Label("SALA 1");
+                CinemaS1.setStyle("-fx-font-size: 12px; -fx-font-weight: bold;");
+                Label matineS1 = new Label("MATINE");
+                ComboBox<String> matineS1ComboBox = new ComboBox<>(listaPeliculas);
+                matineS1ComboBox.setOnAction(e->{
+                    peliculas[0][0] = matineS1ComboBox.getValue();
+                    matineS1Button.setText(peliculas[0][0]);
+                });
+                Label vermutS1 = new Label("Vermut");
+                ComboBox<String> vermutS1ComboBox = new ComboBox<>(listaPeliculas);
+                vermutS1ComboBox.setOnAction( e -> {
+                    peliculas[0][1] = vermutS1ComboBox.getValue();
+                    vermutS1Button.setText(peliculas[0][1]);
+                });
+                Label vespertinoS1 = new Label("Vespertino");
+                ComboBox<String> vespertinoS1ComboBox = new ComboBox<>(listaPeliculas);
+                vespertinoS1ComboBox.setOnAction( e -> {
+                    peliculas[0][2] = vespertinoS1ComboBox.getValue();
+                    vespertinoS1Button.setText(peliculas[0][1]);
+                });
+                sala1.getChildren().addAll(CinemaS1, matineS1,matineS1ComboBox, vermutS1, vermutS1ComboBox, vespertinoS1, vespertinoS1ComboBox);
+
+
+            VBox sala2 = new VBox();
+                Label CinemaS2 = new Label("SALA 2");
+                CinemaS2.setStyle("-fx-font-size: 12px; -fx-font-weight: bold;");
+                Label matineS2 = new Label("MATINE");
+                ComboBox<String> matineS2ComboBox = new ComboBox<>(listaPeliculas);
+                matineS2ComboBox.setOnAction( e -> {
+                    peliculas[1][0] = matineS2ComboBox.getValue();
+                    matineS2Button.setText(peliculas[1][0]);
+                });
+                Label vermutS2 = new Label("Vermut");
+                ComboBox<String> vermutS2ComboBox = new ComboBox<>(listaPeliculas);
+                vermutS2ComboBox.setOnAction( e -> {
+                    peliculas[1][1] = vermutS2ComboBox.getValue();
+                    vermutS2Button.setText(peliculas[1][1]);
+                });
+                Label vespertinoS2 = new Label("Vespertino");
+                ComboBox<String> vespertinS2ComboBox = new ComboBox<>(listaPeliculas);
+                vespertinS2ComboBox.setOnAction( e -> {
+                    peliculas[1][2] = vespertinS2ComboBox.getValue();
+                    vespertinoS2Button.setText(peliculas[1][2]);
+                });
+                sala2.getChildren().addAll(CinemaS2, matineS2,matineS2ComboBox, vermutS2, vermutS2ComboBox, vespertinoS2, vespertinS2ComboBox);
+
+            VBox sala3 = new VBox();
+                Label CinemaS3 = new Label("SALA 3");
+                CinemaS3.setStyle("-fx-font-size: 12px; -fx-font-weight: bold;-fx-alignment: center;");
+                Label matineS3 = new Label("MATINE");
+                ComboBox<String> matineS3ComboBox = new ComboBox<>(listaPeliculas);
+                matineS3ComboBox.setOnAction( e ->{
+                    peliculas[2][0] = matineS3ComboBox.getValue();
+                    matineS3Button.setText(peliculas[2][0]);
+                });
+                Label vermutS3 = new Label("Vermut");
+                Label espacioLabeldenuevo = new Label("       ");
+                ComboBox<String> vermutS3ComboBox = new ComboBox<>(listaPeliculas);
+                vermutS3ComboBox.setOnAction( e -> {
+                    peliculas[2][1] = vermutS3ComboBox.getValue();
+                    vermutS3Button.setText(peliculas[2][1]);
+                });
+                Label vespertinoS3 = new Label("Vespertino");
+                ComboBox<String> vespertinoS3ComboBox = new ComboBox<>(listaPeliculas);
+                vespertinoS3ComboBox.setOnAction( e -> {
+                    peliculas[2][2] = vespertinoS3ComboBox.getValue();
+                    vespertinoS3Button.setText(peliculas[2][2]);
+                });
                 Button botonSiguiente = new Button("Siguiente");
-                
-                //
-                
-                horariosN.getChildren().addAll(vacioN2, horario1N, vacioN3, horario2N, vacioN4, horario3N, vacioN5, botonSiguiente);
-
-            VBox gSalas = new VBox();
-            Label s1 = new Label("      Sala 1             Sala 2             Sala3");
-            s1.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
-            GridPane salas = new GridPane();
-            salas.setHgap(8);
-            salas.setVgap(12); // intentare utilizar poderes de 2 o numeros similares para todo, se ve mas bonito
-            salas.setPadding(new Insets(4));
-            salas.setStyle("-fx-background-color: #F6008B;");
-
-            int cont00, cont01; // conts jiji, queria usar i y j pero se declarana despues y me da miedo cambiar eso
-            
-            for (cont00=0; cont00<3; cont00++){
-                for (cont01=0; cont01<3; cont01++){
-                    ComboBox<String> comboGrid = new ComboBox<>(listaPeliculas);
-                    comboGrid.setPromptText("Seleccionar");
-                    comboGrid.setStyle("-fx-prompt-text-fill: gray; -fx-font-size: 12px;");
-                    salas.add(comboGrid, cont00, cont01);
-                }
-            }
-                gSalas.getChildren().addAll(s1, salas);
-
-                cabezera2.getChildren().addAll(horariosN, gSalas);
-            Scene AsignacionPeliculas = new Scene(cabezera2, 500,200);
-            botonIncio.setOnAction( e -> {
-                ventana.setScene(AsignacionPeliculas);
+                sala3.getChildren().addAll(CinemaS3, matineS3, matineS3ComboBox, vermutS3, vermutS3ComboBox, vespertinoS3, vespertinoS3ComboBox,espacioLabeldenuevo, botonSiguiente);
+                botonSiguiente.setOnAction( e -> {
+                    System.out.println("TEST");
+                });
+        cabezera2.getChildren().addAll(sala1,sala2,sala3);
+        Scene AsignacionPeliculas = new Scene(cabezera2, 500,200);
+    botonIncio.setOnAction( e -> {
+        ventana.setScene(AsignacionPeliculas);
     });
 //ESTADÍSTICAS
 //============================================================================
