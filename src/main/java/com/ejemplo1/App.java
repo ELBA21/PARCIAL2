@@ -18,6 +18,8 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 
+import java.util.ArrayList;
+
 import java.io.IOException;
 /**
  * JavaFX App
@@ -34,7 +36,7 @@ public class App extends Application {
     @Override
     public void start(Stage ventana) throws IOException {
         String[][] peliculas = new String[3][3];
-        Integer[] Fecha = new Integer[3];
+        int[] Fecha = new int[3];
         ventana.setTitle("ULAGOS CINEMA ULTRA CAPITALISTA");
         VBox contenedor = new VBox();
         Label texto1 = new Label("Hola, este el ejemplo");
@@ -182,8 +184,14 @@ public class App extends Application {
                 cabezera2.getChildren().addAll(horariosN, gSalas);
             Scene AsignacionPeliculas = new Scene(cabezera2, 500,200);
             botonIncio.setOnAction( e -> {
-                ventana.setScene(AsignacionPeliculas);
-    });
+                if(Fecha[0]!=0 && Fecha[0]!=0 && Fecha[0]!=0 && listaPeliculas.size() != 0){
+                    ArrayList<String> listaPeliculas2 = new ArrayList<>(listaPeliculas);
+                    Dia dia1 = new Dia(Fecha, listaPeliculas2, 3000);         //Se crea el objeto tipo Dia
+                    ventana.setScene(AsignacionPeliculas);
+                }else{
+                    // Dar mensaje de error
+                }
+            });
 //ESTADÍSTICAS
 //============================================================================
         HBox estadisticas = new HBox();
