@@ -31,7 +31,7 @@ public class App extends Application {
     int Fecha;
     String[][] peliculas;
     int Precio;
-
+    int cont00, cont01;
     @Override
     public void start(Stage ventana) throws IOException {
         String[][] peliculas = new String[3][3];
@@ -44,19 +44,21 @@ public class App extends Application {
             gridPane.setVgap(5); // Espacio vertical entre las celdas
 // ACA DEJARE Declarare Unos cuantos botones de la pagina de Compras
 //====================================================================
-        Button[][] salasHorariosButton = new Button[3][3];
-        Button matineS1Button = new Button("");
-        Button vermutS1Button = new Button("");
-        Button vespertinoS1Button = new Button("");
+        //nuronyan los cambio
+        GridPane botonesCompra = new GridPane();
+        botonesCompra.setHgap(8);
+        botonesCompra.setVgap(12); // intentare utilizar poderes de 2 o numeros similares para todo, se ve mas bonito
+        botonesCompra.setPadding(new Insets(4));
+        botonesCompra.setStyle("-fx-background-color: #F6008B;");
 
-        Button matineS2Button = new Button("");
-        Button vermutS2Button = new Button("");
-        Button vespertinoS2Button = new Button("");
+        String cords[][] = new String[3][3];
 
-        Button matineS3Button = new Button("");       
-        Button vermutS3Button = new Button("");
-        Button vespertinoS3Button = new Button("");
-
+        for(cont00=0;cont00<3;cont00++){
+            for(cont01=0;cont01<3;cont01++){
+                Button botonSala = new Button(cords[cont00][cont01]);
+                botonesCompra.add(botonSala, cont00, cont01);
+            }
+        }
 
 
 //==================================================
@@ -171,8 +173,6 @@ public class App extends Application {
             salas.setPadding(new Insets(4));
             salas.setStyle("-fx-background-color: #F6008B;");
 
-            int cont00, cont01; // conts jiji, queria usar i y j pero se declarana despues y me da miedo cambiar eso
-            
             for (cont00=0; cont00<3; cont00++){
                 for (cont01=0; cont01<3; cont01++){
                     ComboBox<String> comboGrid = new ComboBox<>(listaPeliculas);
@@ -234,40 +234,22 @@ public class App extends Application {
 //Centro de Compras
 //============================================================================
         HBox cabezera3 = new HBox();
-            VBox BSala1 = new VBox();
-                Label cCompras = new Label("Centro de Compras");
-                cCompras.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;-fx-alignment: center;");
-                Label Matine = new Label("Matine");
-                Matine.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
-                Label Vermut = new Label("Vermut");
-                Vermut.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
-                Label Vespertino = new Label("Vespertino");
-                Vespertino.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
-                BSala1.getChildren().addAll(cCompras,Matine, Vermut, Vespertino);
+            VBox horariosN2 = new VBox();
+            Label espacion = new Label(" "); // all my homies hate " "
+            Label matineN = new Label("Matine");
+            Label VermutN = new Label("Vermut");
+            Label VespertinoN = new Label("Vespertino");
+            horariosN2.getChildren().addAll(espacion, matineN, VermutN, VespertinoN);
 
-            VBox BSala2 = new VBox();
-                Label BCinemaS1 = new Label("   Sala 1");
-                GridPane salaBotonesGridPane = new GridPane();
-                    salaBotonesGridPane.setHgap(3);
-                    salaBotonesGridPane.setVgap(3);
-                BSala2.getChildren().addAll(BCinemaS1, matineS1Button, vermutS1Button,vespertinoS1Button);
-
-            VBox BSala3 = new VBox();
-                Label BCinemaS2 = new Label("   Sala 2");
-                BSala3.getChildren().addAll(BCinemaS2,matineS2Button, vermutS2Button, vespertinoS2Button);
-
-            VBox BSala4 = new VBox();
-                Label BCinemaS3  = new Label("    Sala 3");
-                Button botonEstadisticas = new Button("Estadisticas");
-                botonEstadisticas.setOnAction( e -> {
-                    ventana.setScene(estadisticasCompra);
-                });
-                BSala4.getChildren().addAll(BCinemaS3,matineS3Button, vermutS3Button, vespertinoS3Button,botonEstadisticas);
-
-        cabezera3.getChildren().addAll(BSala1, BSala2, BSala3, BSala4);
-    Scene centroDeCompras = new Scene(cabezera3,500, 200 );
-    botonSiguiente.setOnAction( e -> {  // Se declara accion del boton
-        ventana.setScene(centroDeCompras);
+            VBox losBotones = new VBox();
+            Label salasCC = new Label(" SALA 1 SALA 2  SALA 3");
+            losBotones.getChildren().addAll(salasCC, botonesCompra);
+            cabezera3.getChildren().addAll(horariosN2, losBotones);
+            
+            Scene centroDeCompras = new Scene(cabezera3,500, 200 );
+                botonSiguiente.setOnAction( e -> {  // Se declara accion del boton
+                ventana.setScene(centroDeCompras);
+   
     });
 
 //MATRIZ DE ASIENTOS
@@ -288,17 +270,17 @@ HBox cabecera4 = new HBox();
         Label resumenCompras = new Label("RESUMEN DE COMPRA");
         resumenCompras.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;-fx-alignment: center;");
         Label rPelicula = new Label("Pelicula: XXXXX");
-        Matine.setStyle("-fx-font-size: 12px;-fx-alignment: center;");
+        
         Label rHora = new Label("Hora: XX:XX");
-        Matine.setStyle("-fx-font-size: 12px;-fx-alignment: center;");
+        
         Label rSala = new Label("Sala: XXXXX");
-        Matine.setStyle("-fx-font-size: 12px;-fx-alignment: center;");
+        
         Label rAsientos = new Label("Asientos: XXXXX");
-        Matine.setStyle("-fx-font-size: 12px;-fx-alignment: center;");
+        
         Label rFecha = new Label("Fecha: XX/XX/XXXX");
-        Matine.setStyle("-fx-font-size: 12px;-fx-alignment: center;");
+        
         Label rTotal = new Label("Total: $ XXXXX");
-        Matine.setStyle("-fx-font-size: 12px;-fx-alignment: center;");
+        
         Label graciasCompra = new Label("¡GRACIAS POR SU COMPRA!");
         graciasCompra.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;-fx-alignment: center;");
     VCompras.getChildren().addAll(resumenCompras,rPelicula,rHora,rSala,rAsientos,rFecha,rTotal,graciasCompra);
