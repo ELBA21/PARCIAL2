@@ -28,7 +28,6 @@ public class App extends Application {
     private static Scene scene;
     private ObservableList<String> listaPeliculas = FXCollections.observableArrayList(); 
     //Esta es una mauski herramienta misteriosa que usaremos mas tarde AJ
-    int Fecha;
     String[][] peliculas;
     int Precio;
     int cont00, cont01;
@@ -75,13 +74,10 @@ public class App extends Application {
                     ObservableList<Integer> dias = FXCollections.observableArrayList(//Creamos Array pa usarlo luego
                         1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31);
                     ComboBox<Integer> comboDias = new ComboBox<>(dias); //Creamos lista desplegable, que recibe el array de ahora
-                    comboDias.setOnAction( e -> {
-                        Fecha[0] = comboDias.getValue();
-                    });
                     comboDias.setPromptText("Seleccione el dia"); //El texto que sale antes de desplegar
                     comboDias.setOnAction(e -> {
-                        int diaSeleccionado = comboDias.getSelectionModel().getSelectedItem(); //Guarda el dato de la lista en una variable YEI! 
-                        System.out.println("Selected Option: " + diaSeleccionado); //Escribe en la terminal, solo de prueba, luego llamamos un set algo
+                        Fecha[0] = comboDias.getSelectionModel().getSelectedItem(); //Guarda el dato de la lista en una variable YEI! 
+                        System.out.println("Selected Option: " + Fecha[0]); //Escribe en la terminal, solo de prueba, luego llamamos un set algo
                     });
 
 
@@ -91,8 +87,8 @@ public class App extends Application {
                     ComboBox<Integer> comboMes = new ComboBox<>(Mes);
                     comboMes.setPromptText("Selecione el Mes");
                     comboMes.setOnAction(e ->{
-                        int mesSeleccionado = comboDias.getSelectionModel().getSelectedItem();
-                        System.out.println("Mes selecionado: " + mesSeleccionado);
+                        Fecha[1] = comboDias.getSelectionModel().getSelectedItem();
+                        System.out.println("Mes selecionado: " + Fecha[1]);
                     });
 
                     Label FechaAño = new Label("Año");
@@ -101,8 +97,8 @@ public class App extends Application {
                     ComboBox<Integer> comboAño = new ComboBox<>(Años);
                     comboAño.setPromptText("Seleccione el año");
                     comboAño.setOnAction( e -> {
-                        int añoSeleccionado = comboAño.getSelectionModel().getSelectedItem();
-                        System.out.println("Año seleccionado: "  + añoSeleccionado);
+                        Fecha[2] = comboAño.getSelectionModel().getSelectedItem();
+                        System.out.println("Año seleccionado: "  + Fecha[2]);
                     });
                     Fechas.getChildren().addAll(FechaDia, comboDias, FechaMes, comboMes, FechaAño, comboAño);
                 contenedorA1.getChildren().addAll(espacioa1,espacioa2,espacioa3, espacioa4,Fechas);
