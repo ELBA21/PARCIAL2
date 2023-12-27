@@ -52,11 +52,9 @@ public class App extends Application {
         botonesCompra.setPadding(new Insets(4));
         botonesCompra.setStyle("-fx-background-color: #F6008B;");
 
-        String cords[][] = new String[3][3];
-
         for(i=0;i<3;i++){
             for(j=0;j<3;j++){
-                Button botonSala = new Button(cords[i][j]);
+                Button botonSala = new Button(peliculas[i][j]);
                 botonesCompra.add(botonSala, j, i);
             }
         }
@@ -176,11 +174,10 @@ public class App extends Application {
                     ComboBox<String> comboGrid = new ComboBox<>(listaPeliculas);
                     comboGrid.setPromptText("Seleccionar");
                     comboGrid.setStyle("-fx-prompt-text-fill: gray; -fx-font-size: 12px;");
-                    cords[i][j] =
                     salas.add(comboGrid, j, i);
-                    cords[i][j] = 
-                }
+                    
             }
+        }
                 gSalas.getChildren().addAll(s1, salas);
 
                 cabezera2.getChildren().addAll(horariosN, gSalas);
@@ -326,6 +323,7 @@ Scene resumenDeCompras = new Scene(cabecera4,500, 200 );
         
         ventana.show();
     }
+    
 
     public static void main(String[] args) {
         launch();
