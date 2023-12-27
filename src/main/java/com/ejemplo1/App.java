@@ -40,11 +40,7 @@ public class App extends Application {
     @Override
     public void start(Stage ventana) throws IOException {
         ventana.setTitle("ULAGOS CINEMA ULTRA CAPITALISTA");
-        VBox contenedor = new VBox();
-        Label texto1 = new Label("Hola, este el ejemplo");
-        GridPane gridPane = new GridPane(); // Quien fue el vio que hizo esto?????
-            gridPane.setHgap(5); // Espacio horizontal entre las celdas
-            gridPane.setVgap(5); // Espacio vertical entre las celdas
+        
 // ACA DEJARE Declarare Unos cuantos botones de la pagina de Compras
 //====================================================================
         //nuronyan los cambio
@@ -274,17 +270,6 @@ public class App extends Application {
 
    
     });
-
-//MATRIZ DE ASIENTOS
-//========================================================================
-        String[] filitas ={"A","B","C","D","E"};
-        ToggleButton[][] asientitos = new ToggleButton[5][5];
-        for(i=0; i<5; i++){
-            for(j=0; j<5; j++){
-                asientitos[i][j] = new ToggleButton(filitas[i]+(j+1));
-                GridPane.setConstraints(asientitos[i][j], j, i);
-            }
-        }
 //RESUMEN DE COMPRAS
 //========================================================================
 HBox cabecera4 = new HBox();
@@ -308,39 +293,7 @@ HBox cabecera4 = new HBox();
     VCompras.getChildren().addAll(resumenCompras,rPelicula,rHora,rSala,rAsientos,rFecha,rTotal,graciasCompra);
 cabecera4.getChildren().addAll(VCompras);
 Scene resumenDeCompras = new Scene(cabecera4,500, 200 );
-//======EN ESTA SECCION PODRAS MODIFICAR LAS FUNCIONES DE LOS BOTONES DADOS=======
-        for(i=0; i<5; i++){
-            for(j=0; j<5; j++){
-                int finalI = i;
-                int finalJ = j;
-                asientitos[finalI][j].setOnAction( a -> {
-                    if(asientitos[finalI][finalJ].isSelected()){
-                        System.out.println(filitas[finalI]+(finalJ+1)+" Seleccionado");
-                    } else {
-                        System.out.println(filitas[finalI]+(finalJ+1)+" Sin seleccionar");
-                    }
-                });
-            }
-        }
-//=====================================================================================
-        for(i=0; i<5; i++){
-            for(j=0; j<5; j++){
-                gridPane.getChildren().addAll(asientitos[i][j]);
-            }
-        }
-        contenedor.getChildren().addAll(texto1, gridPane);
-        Scene matrizAsiento = new Scene(contenedor, 1000, 600);
-        //EggKing1.setOnAction(e -> {ventana.setScene(matrizAsiento);});
 
-
-
-
-
-
-
-
-
-        
         ventana.show();
     }
     
@@ -370,9 +323,40 @@ Scene resumenDeCompras = new Scene(cabecera4,500, 200 );
             VBox ventEmergVBox = new VBox();
                 Label ventELabel = new Label("ete sech el pepe");
                 // toggle buttons
+                GridPane gridPane = new GridPane(); // Quien fue el vio que hizo esto?????
+                    gridPane.setHgap(5); // Espacio horizontal entre las celdas
+                    gridPane.setVgap(5); // Espacio vertical entre las celdas
 
+                String[] filitas ={"A","B","C","D","E"};
+                ToggleButton[][] asientitos = new ToggleButton[5][5];
+                for(i=0; i<5; i++){
+                    for(j=0; j<5; j++){
+                    asientitos[i][j] = new ToggleButton(filitas[i]+(j+1));
+                    GridPane.setConstraints(asientitos[i][j], j, i);
+                    }
+                }
+
+                for(i=0; i<5; i++){
+                    for(j=0; j<5; j++){
+                        int finalI = i;
+                        int finalJ = j;
+                        asientitos[finalI][finalJ].setOnAction( a -> {
+                            if(asientitos[finalI][finalJ].isSelected()){
+                                System.out.println(filitas[finalI]+(finalJ+1)+" Seleccionado");
+                            } else {
+                                System.out.println(filitas[finalI]+(finalJ+1)+" Sin seleccionar");
+                            }
+                        });
+                    }
+                }
+
+                for(i=0; i<5; i++){
+                    for(j=0; j<5; j++){
+                        gridPane.getChildren().addAll(asientitos[i][j]);
+                    }
+                }
                 //
-            ventEmergVBox.getChildren().addAll(ventELabel);
+            ventEmergVBox.getChildren().addAll(ventELabel, gridPane);
         nuevaVentana.getChildren().addAll(ventEmergVBox);
         
         Scene VEScene = new Scene(nuevaVentana, 640, 480);
