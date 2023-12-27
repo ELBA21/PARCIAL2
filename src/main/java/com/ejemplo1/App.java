@@ -175,7 +175,9 @@ public class App extends Application {
                     comboGrid.setPromptText("Seleccionar");
                     comboGrid.setStyle("-fx-prompt-text-fill: gray; -fx-font-size: 12px;");
                     salas.add(comboGrid, j, i);
-                    
+                    comboGrid.setOnAction(e ->{
+                        peliculas[i][j] = comboGrid.getSelectionModel().getSelectedItem();
+                    });
             }
         }
                 gSalas.getChildren().addAll(s1, salas);
