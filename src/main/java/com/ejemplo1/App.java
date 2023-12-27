@@ -248,13 +248,6 @@ public class App extends Application {
             botonesCompra.setStyle("-fx-background-color: #F6008B;");
 
             int[] ij = {0, 0}; 
-
-            /*for(i=0;i<3;i++){
-                for(j=0;j<3;j++){
-                    Button botonSala = new Button(peliculas[i][j]);
-                    botonesCompra.add(botonSala, j, i);
-                }
-            }*/
             
             Scene centroDeCompras = new Scene(cabezera3,500, 200 );
 
