@@ -47,7 +47,7 @@ public class App extends Application {
 // ACA DEJARE Declarare Unos cuantos botones de la pagina de Compras
 //====================================================================
         //nuronyan los cambio
-
+        //Andresitoxd69 lo movió a la linea 233
 //==================================================
 //VENTANA DE INICIO
 //===========================================================================
