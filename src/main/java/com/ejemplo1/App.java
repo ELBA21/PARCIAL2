@@ -32,7 +32,7 @@ public class App extends Application {
     //Esta es una mauski herramienta misteriosa que usaremos mas tarde AJ
     String[][] peliculas;
     int Precio;
-    int cont00, cont01;
+    int i, j;
     @Override
     public void start(Stage ventana) throws IOException {
         String[][] peliculas = new String[3][3];
@@ -54,10 +54,10 @@ public class App extends Application {
 
         String cords[][] = new String[3][3];
 
-        for(cont00=0;cont00<3;cont00++){
-            for(cont01=0;cont01<3;cont01++){
-                Button botonSala = new Button(cords[cont00][cont01]);
-                botonesCompra.add(botonSala, cont00, cont01);
+        for(i=0;i<3;i++){
+            for(j=0;j<3;j++){
+                Button botonSala = new Button(cords[i][j]);
+                botonesCompra.add(botonSala, j, i);
             }
         }
 
@@ -171,12 +171,14 @@ public class App extends Application {
             salas.setPadding(new Insets(4));
             salas.setStyle("-fx-background-color: #F6008B;");
 
-            for (cont00=0; cont00<3; cont00++){
-                for (cont01=0; cont01<3; cont01++){
+            for (i=0; i<3; i++){
+                for (j=0; j<3; j++){
                     ComboBox<String> comboGrid = new ComboBox<>(listaPeliculas);
                     comboGrid.setPromptText("Seleccionar");
                     comboGrid.setStyle("-fx-prompt-text-fill: gray; -fx-font-size: 12px;");
-                    salas.add(comboGrid, cont00, cont01);
+                    cords[i][j] =
+                    salas.add(comboGrid, j, i);
+                    cords[i][j] = 
                 }
             }
                 gSalas.getChildren().addAll(s1, salas);
@@ -260,7 +262,6 @@ public class App extends Application {
 //========================================================================
         String[] filitas ={"A","B","C","D","E"};
         ToggleButton[][] asientitos = new ToggleButton[5][5];
-        int i,j;
         for(i=0; i<5; i++){
             for(j=0; j<5; j++){
                 asientitos[i][j] = new ToggleButton(filitas[i]+(j+1));
