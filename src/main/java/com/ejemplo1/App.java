@@ -247,21 +247,30 @@ public class App extends Application {
             botonesCompra.setPadding(new Insets(4));
             botonesCompra.setStyle("-fx-background-color: #F6008B;");
 
-            for(i=0;i<3;i++){
+            int[] ij = {0, 0}; 
+
+            /*for(i=0;i<3;i++){
                 for(j=0;j<3;j++){
                     Button botonSala = new Button(peliculas[i][j]);
                     botonesCompra.add(botonSala, j, i);
                 }
-            }
-
-            losBotones.getChildren().addAll(salasCC, botonesCompra);
-            cabezera3.getChildren().addAll(horariosN2, losBotones);
+            }*/
             
             Scene centroDeCompras = new Scene(cabezera3,500, 200 );
 
                 botonSiguiente.setOnAction( e -> {  // Se declara accion del boton
                     if(hayVacio(peliculas)){}else{
                         diasAux[0].agregarFunciones(peliculas);
+                        for(ij[0]=0; ij[0]<3; ij[0]++){
+                            for(ij[1]=0; ij[1]<3; ij[1]++){
+                                Button botonSala = new Button(peliculas[ij[0]][ij[1]]);
+                                botonesCompra.add(botonSala, ij[1], ij[0]);
+                            }
+                        }   
+
+
+                        losBotones.getChildren().addAll(salasCC, botonesCompra);
+                        cabezera3.getChildren().addAll(horariosN2, losBotones);
                         ventana.setScene(centroDeCompras);
                     }
 
