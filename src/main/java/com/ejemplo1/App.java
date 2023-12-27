@@ -17,10 +17,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-
 import java.util.ArrayList;
-
 import java.io.IOException;
+// ventana emergente
+import javafx.stage.Modality;
+import javafx.scene.layout.StackPane;
 /**
  * JavaFX App
  */
@@ -250,7 +251,7 @@ public class App extends Application {
             int[] ij = {0, 0}; 
             
             Scene centroDeCompras = new Scene(cabezera3,500, 200 );
-
+            
                 botonSiguiente.setOnAction( e -> {  // Se declara accion del boton
                     if(hayVacio(peliculas)){}else{
                         diasAux[0].agregarFunciones(peliculas);
@@ -258,9 +259,13 @@ public class App extends Application {
                             for(ij[1]=0; ij[1]<3; ij[1]++){
                                 Button botonSala = new Button(peliculas[ij[0]][ij[1]]);
                                 botonesCompra.add(botonSala, ij[1], ij[0]);
+                                //
+                                botonSala.setOnAction(e -> abrirVentana());
+                                //
+
                             }
                         }   
-
+                        
 
                         losBotones.getChildren().addAll(salasCC, botonesCompra);
                         cabezera3.getChildren().addAll(horariosN2, losBotones);
@@ -354,6 +359,26 @@ Scene resumenDeCompras = new Scene(cabecera4,500, 200 );
             }
         }
         return false;
+    }
+
+    public void abrirVentana(){
+        Stage ventanaEmergente = new Stage();
+        ventanaEmergente.initModality(Modality.APPLICATION_MODAL);           
+        ventanaEmergente.setTitle("Andres, oh dios mio");
+
+        HBox nuevaVentana = new HBox();
+            VBox ventEmergVBox = new VBox();
+                Label ventELabel = new Label("ete sech el pepe");
+                // toggle buttons
+
+                //
+            ventEmergVBox.getChildren().addAll(ventELabel);
+        nuevaVentana.getChildren().addAll(ventEmergVBox);
+        
+        Scene VEScene = new Scene(nuevaVentana);
+        ventanaEmergente.setScene(VEScene);
+
+        ventanaEmergente.showAndWait();
     }
 
 }
