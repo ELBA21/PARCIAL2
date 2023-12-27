@@ -42,7 +42,7 @@ public class App extends Application {
         ventana.setTitle("ULAGOS CINEMA ULTRA CAPITALISTA");
         VBox contenedor = new VBox();
         Label texto1 = new Label("Hola, este el ejemplo");
-        GridPane gridPane = new GridPane();
+        GridPane gridPane = new GridPane(); // Quien fue el vio que hizo esto?????
             gridPane.setHgap(5); // Espacio horizontal entre las celdas
             gridPane.setVgap(5); // Espacio vertical entre las celdas
 // ACA DEJARE Declarare Unos cuantos botones de la pagina de Compras
@@ -260,7 +260,7 @@ public class App extends Application {
                                 Button botonSala = new Button(peliculas[ij[0]][ij[1]]);
                                 botonesCompra.add(botonSala, ij[1], ij[0]);
                                 //
-                                botonSala.setOnAction(e -> abrirVentana());
+                                botonSala.setOnAction(a -> abrirVentana());
                                 //
 
                             }
@@ -375,7 +375,7 @@ Scene resumenDeCompras = new Scene(cabecera4,500, 200 );
             ventEmergVBox.getChildren().addAll(ventELabel);
         nuevaVentana.getChildren().addAll(ventEmergVBox);
         
-        Scene VEScene = new Scene(nuevaVentana);
+        Scene VEScene = new Scene(nuevaVentana, 640, 480);
         ventanaEmergente.setScene(VEScene);
 
         ventanaEmergente.showAndWait();
