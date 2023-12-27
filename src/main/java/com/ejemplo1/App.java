@@ -30,13 +30,14 @@ public class App extends Application {
     private static Scene scene;
     private ObservableList<String> listaPeliculas = FXCollections.observableArrayList(); 
     //Esta es una mauski herramienta misteriosa que usaremos mas tarde AJ
-    String[][] peliculas;
+    Dia[] diasAux = new Dia[7];
+
+    String[][] peliculas = new String[3][3];
+    int[] Fecha = new int[3];
     int Precio;
     int i, j;
     @Override
     public void start(Stage ventana) throws IOException {
-        String[][] peliculas = new String[3][3];
-        int[] Fecha = new int[3];
         ventana.setTitle("ULAGOS CINEMA ULTRA CAPITALISTA");
         VBox contenedor = new VBox();
         Label texto1 = new Label("Hola, este el ejemplo");
@@ -46,19 +47,6 @@ public class App extends Application {
 // ACA DEJARE Declarare Unos cuantos botones de la pagina de Compras
 //====================================================================
         //nuronyan los cambio
-        GridPane botonesCompra = new GridPane();
-        botonesCompra.setHgap(8);
-        botonesCompra.setVgap(12); // intentare utilizar poderes de 2 o numeros similares para todo, se ve mas bonito
-        botonesCompra.setPadding(new Insets(4));
-        botonesCompra.setStyle("-fx-background-color: #F6008B;");
-
-        for(i=0;i<3;i++){
-            for(j=0;j<3;j++){
-                Button botonSala = new Button(peliculas[i][j]);
-                botonesCompra.add(botonSala, j, i);
-            }
-        }
-
 
 //==================================================
 //VENTANA DE INICIO
@@ -175,19 +163,23 @@ public class App extends Application {
                     comboGrid.setPromptText("Seleccionar");
                     comboGrid.setStyle("-fx-prompt-text-fill: gray; -fx-font-size: 12px;");
                     salas.add(comboGrid, j, i);
+                    final int fil = i;
+                    final int col = j;
                     comboGrid.setOnAction(e ->{
-                        peliculas[i][j] = comboGrid.getSelectionModel().getSelectedItem();
+                        peliculas[fil][col] = comboGrid.getSelectionModel().getSelectedItem();
                     });
             }
         }
+
                 gSalas.getChildren().addAll(s1, salas);
 
                 cabezera2.getChildren().addAll(horariosN, gSalas);
             Scene AsignacionPeliculas = new Scene(cabezera2, 500,200);
+            
             botonIncio.setOnAction( e -> {
                 if(Fecha[0]!=0 && Fecha[0]!=0 && Fecha[0]!=0 && listaPeliculas.size() != 0){
                     ArrayList<String> listaPeliculas2 = new ArrayList<>(listaPeliculas);
-                    Dia dia1 = new Dia(Fecha, listaPeliculas2, 3000);         //Se crea el objeto tipo Dia
+                    diasAux[0] = new Dia(Fecha, listaPeliculas2, 3000);         //Se crea el objeto tipo Dia
                     ventana.setScene(AsignacionPeliculas);
                 }else{
                     // Dar mensaje de error
@@ -248,12 +240,31 @@ public class App extends Application {
 
             VBox losBotones = new VBox();
             Label salasCC = new Label(" SALA 1 SALA 2  SALA 3");
+
+            GridPane botonesCompra = new GridPane();
+            botonesCompra.setHgap(8);
+            botonesCompra.setVgap(12); // intentare utilizar poderes de 2 o numeros similares para todo, se ve mas bonito
+            botonesCompra.setPadding(new Insets(4));
+            botonesCompra.setStyle("-fx-background-color: #F6008B;");
+
+            for(i=0;i<3;i++){
+                for(j=0;j<3;j++){
+                    Button botonSala = new Button(peliculas[i][j]);
+                    botonesCompra.add(botonSala, j, i);
+                }
+            }
+
             losBotones.getChildren().addAll(salasCC, botonesCompra);
             cabezera3.getChildren().addAll(horariosN2, losBotones);
             
             Scene centroDeCompras = new Scene(cabezera3,500, 200 );
+
                 botonSiguiente.setOnAction( e -> {  // Se declara accion del boton
-                ventana.setScene(centroDeCompras);
+                    if(hayVacio(peliculas)){}else{
+                        diasAux[0].agregarFunciones(peliculas);
+                        ventana.setScene(centroDeCompras);
+                    }
+
    
     });
 
@@ -329,6 +340,18 @@ Scene resumenDeCompras = new Scene(cabecera4,500, 200 );
 
     public static void main(String[] args) {
         launch();
+    }
+
+    public boolean hayVacio(String[][] matriz){
+        int i,j;
+        for(i=0; i<3; i++){
+            for(j=0; j<3; j++){
+                if (matriz[i][j]==null){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }
