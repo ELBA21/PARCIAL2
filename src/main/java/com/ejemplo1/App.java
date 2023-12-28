@@ -120,6 +120,9 @@ public class App extends Application {
             HBox.setMargin(botonIncio, new Insets(100,0,0,0));
             Scene inicio = new Scene(cabezera,500,200);
             ventana.setScene(inicio);
+            ventana.show();
+            System.out.println("ventana setScene(inicio)");
+            
 //Asignacion de Peliculas
 //============================================================================
         HBox cabezera2 = new HBox();
@@ -328,21 +331,11 @@ public class App extends Application {
                     }
                 }
                 Button comprar = new Button("Comprar");
-                /* 
-                HBox fin = new HBox();
-                    VBox graciasVBox = new VBox();
-                        Label graciasLabel = new Label("Gracias por su compra");
-                    graciasVBox.getChildren().addAll(graciasLabel);
-                fin.getChildren().addAll(graciasVBox);
-                Scene gracias = new Scene(fin);
-                */
                 comprar.setOnAction(e -> {
                     if(nAsientos[0]!=0){
                         diasAux[0].funciones[f][c].agregarCompra(new Compra(nAsientos[0], asientosEsc,3000*nAsientos[0]));
                         diasAux[0].funciones[f][c].setSala(asientosAux);
                         diasAux[0].funciones[f][c].actualizarGanancia(3000*nAsientos[0]);
-
-                        //ventanaEmergente.setScene(gracias);
                     }
                 });
             ventEmergVBox.getChildren().addAll(ventELabel, gridPane, comprar);
