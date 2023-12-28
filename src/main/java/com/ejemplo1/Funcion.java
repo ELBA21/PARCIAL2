@@ -14,12 +14,12 @@ public class Funcion {
         this.horario = horario;
         this.pelicula = pelicula;
     }
-    public void usarAsiento(int i, int j){
+    /*public void usarAsiento(int i, int j){
         sala[i][j] = 1;
     }
     public void noUsarAsiento(int i, int j){
         sala[i][j] = 0;
-    }
+    }*/
     public void actualizarGanancia(int newSuma){
         ganancia += newSuma;
     }
@@ -44,4 +44,13 @@ public class Funcion {
     public int getGanancia(){
         return this.ganancia;
     }   
+
+    public void setSala(int[][] matriz){
+        int i, j;
+        for(i=0; i<5; i++){
+            for(j=0; j<5; j++){
+                this.sala[i][j] = matriz[i][j];
+            }
+        }
+    }
 }

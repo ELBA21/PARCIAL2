@@ -251,12 +251,14 @@ public class App extends Application {
                 botonSiguiente.setOnAction( e -> {  // Se declara accion del boton
                     if(hayVacio(peliculas)){}else{
                         diasAux[0].agregarFunciones(peliculas);
-                        for(ij[0]=0; ij[0]<3; ij[0]++){
-                            for(ij[1]=0; ij[1]<3; ij[1]++){
-                                Button botonSala = new Button(peliculas[ij[0]][ij[1]]);
-                                botonesCompra.add(botonSala, ij[1], ij[0]);
+                        for(i=0; i<3; i++){
+                            for(j=0; j<3; j++){
+                                final int ifi = i;
+                                final int jfi = j;
+                                Button botonSala = new Button(peliculas[ifi][jfi]);
+                                botonesCompra.add(botonSala, ifi, jfi);
                                 //
-                                botonSala.setOnAction(a -> abrirVentana());
+                                botonSala.setOnAction(a -> abrirVentana(ifi, jfi));
                                 //
 
                             }
@@ -314,7 +316,28 @@ Scene resumenDeCompras = new Scene(cabecera4,500, 200 );
         return false;
     }
 
-    public void abrirVentana(){
+    public void copiaMatriz(int[][] matriz1, int[][] matriz2){
+        int i, j;
+        for(i=0; i<5; i++){
+            for(j=0; j<5; j++){
+                matriz1[i][j] = matriz2[i][j];
+            }
+        }
+    }
+
+    public void arreglaArrays(String strinc, ArrayList<String> array){
+        if(array.contains(strinc)){}else{
+            array.add(strinc);
+        }
+    }
+
+    public void abrirVentana(int f, int c){
+        int[][] asientosAux = new int[5][5];
+        int[] nAsientos = {0};
+        ArrayList<String> asientosEsc = new ArrayList<>();
+        copiaMatriz(asientosAux, diasAux[0].funciones[f][c].getSala());
+        //asientosAux[2][2]=1;
+
         Stage ventanaEmergente = new Stage();
         ventanaEmergente.initModality(Modality.APPLICATION_MODAL);           
         ventanaEmergente.setTitle("Andres, oh dios mio");
@@ -331,8 +354,11 @@ Scene resumenDeCompras = new Scene(cabecera4,500, 200 );
                 ToggleButton[][] asientitos = new ToggleButton[5][5];
                 for(i=0; i<5; i++){
                     for(j=0; j<5; j++){
-                    asientitos[i][j] = new ToggleButton(filitas[i]+(j+1));
-                    GridPane.setConstraints(asientitos[i][j], j, i);
+                        asientitos[i][j] = new ToggleButton(filitas[i]+(j+1));
+                        GridPane.setConstraints(asientitos[i][j], j, i);
+                        if(asientosAux[i][j]==1){
+                            asientitos[i][j].setDisable(true);
+                        }
                     }
                 }
 
@@ -343,8 +369,15 @@ Scene resumenDeCompras = new Scene(cabecera4,500, 200 );
                         asientitos[finalI][finalJ].setOnAction( a -> {
                             if(asientitos[finalI][finalJ].isSelected()){
                                 System.out.println(filitas[finalI]+(finalJ+1)+" Seleccionado");
+                                asientosAux[finalI][finalJ] = 1;
+                                nAsientos[0]++;
+                                arreglaArrays(asientitos[finalI][finalJ].getText(), asientosEsc);
+
                             } else {
                                 System.out.println(filitas[finalI]+(finalJ+1)+" Sin seleccionar");
+                                asientosAux[finalI][finalJ] = 0;
+                                nAsientos[0]--;
+                                arreglaArrays(asientitos[finalI][finalJ].getText(), asientosEsc);
                             }
                         });
                     }
@@ -355,8 +388,15 @@ Scene resumenDeCompras = new Scene(cabecera4,500, 200 );
                         gridPane.getChildren().addAll(asientitos[i][j]);
                     }
                 }
-                //
-            ventEmergVBox.getChildren().addAll(ventELabel, gridPane);
+                Button comprar = new Button("Comprar");
+                comprar.setOnAction(e -> {
+                    if(nAsientos[0]!=0){
+                        diasAux[0].funciones[f][c].agregarCompra(new Compra(nAsientos[0], asientosEsc,3000*nAsientos[0]));
+                        diasAux[0].funciones[f][c].setSala(asientosAux);
+                        diasAux[0].funciones[f][c].actualizarGanancia(3000*nAsientos[0]);
+                    }
+                });
+            ventEmergVBox.getChildren().addAll(ventELabel, gridPane, comprar);
         nuevaVentana.getChildren().addAll(ventEmergVBox);
         
         Scene VEScene = new Scene(nuevaVentana, 640, 480);
