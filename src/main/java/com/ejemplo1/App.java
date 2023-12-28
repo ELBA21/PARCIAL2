@@ -404,5 +404,5 @@ Scene resumenDeCompras = new Scene(cabecera4,500, 200 );
 
         ventanaEmergente.showAndWait();
     }
-
+    //Comentario de prueba
 }
