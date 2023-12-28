@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.io.IOException;
 // ventana emergente
 import javafx.stage.Modality;
-import javafx.scene.layout.StackPane;
 /**
  * JavaFX App
  */
@@ -184,47 +183,7 @@ public class App extends Application {
             });
 //ESTADÍSTICAS
 //============================================================================
-        HBox estadisticas = new HBox();
-            VBox ESala = new VBox();
-                Label eCompras = new Label("Estadísticas");
-                eCompras.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;-fx-alignment: center;");
-                ESala.getChildren().addAll(eCompras);
-
-            VBox ESala1 = new VBox();
-                Label eMatine = new Label("Matine");
-                eMatine.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
-                Label eVermut = new Label("Vermut");
-                eVermut.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
-                Label eVespertino = new Label("Vespertino");
-                eVespertino.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
-                ESala1.getChildren().addAll(eMatine, eVermut, eVespertino);
-            VBox ESala2 = new VBox();
-                Label eMatine2 = new Label("Matine");
-                eMatine2.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
-                Label eVermut2 = new Label("Vermut");
-                eVermut2.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
-                Label eVespertino2 = new Label("Vespertino");
-                eVespertino2.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
-                ESala2.getChildren().addAll(eMatine2, eVermut2, eVespertino2);
-            VBox ESala3 = new VBox();
-                Label eMatine3 = new Label("Matine");
-                eMatine3.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
-                Label eVermut3 = new Label("Vermut");
-                eVermut3.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
-                Label eVespertino3 = new Label("Vespertino");
-                eVespertino3.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
-                ESala3.getChildren().addAll(eMatine3, eVermut3, eVespertino3);
-            VBox ESala4 = new VBox();
-                Label eMatine4 = new Label("Matine");
-                eMatine4.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
-                Label eVermut4 = new Label("Vermut");
-                eVermut4.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
-                Label eVespertino4 = new Label("Vespertino");
-                eVespertino4.setStyle("-fx-font-size: 16px;-fx-alignment: center;");
-                ESala4.getChildren().addAll(eMatine4, eVermut4, eVespertino4);
-        estadisticas.getChildren().addAll(ESala,ESala1, ESala2, ESala3, ESala4);
-    Scene estadisticasCompra = new Scene(estadisticas,500, 200 );
-
+        // se movio abajo
 //Centro de Compras
 //============================================================================
         HBox cabezera3 = new HBox();
@@ -233,7 +192,9 @@ public class App extends Application {
             Label matineN = new Label("Matine");
             Label VermutN = new Label("Vermut");
             Label VespertinoN = new Label("Vespertino");
-            horariosN2.getChildren().addAll(espacion, matineN, VermutN, VespertinoN);
+            Button botonStats = new Button("Estadisticas");
+            botonStats.setOnAction(b -> estadisticasEmergente());
+            horariosN2.getChildren().addAll(espacion, matineN, VermutN, VespertinoN, botonStats);
 
             VBox losBotones = new VBox();
             Label salasCC = new Label(" SALA 1 SALA 2  SALA 3");
@@ -274,29 +235,7 @@ public class App extends Application {
     });
 //RESUMEN DE COMPRAS
 //========================================================================
-HBox cabecera4 = new HBox();
-    VBox VCompras = new VBox();
-        Label resumenCompras = new Label("RESUMEN DE COMPRA");
-        resumenCompras.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;-fx-alignment: center;");
-        Label rPelicula = new Label("Pelicula: XXXXX");
-        
-        Label rHora = new Label("Hora: XX:XX");
-        
-        Label rSala = new Label("Sala: XXXXX");
-        
-        Label rAsientos = new Label("Asientos: XXXXX");
-        
-        Label rFecha = new Label("Fecha: XX/XX/XXXX");
-        
-        Label rTotal = new Label("Total: $ XXXXX");
-        
-        Label graciasCompra = new Label("¡GRACIAS POR SU COMPRA!");
-        graciasCompra.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;-fx-alignment: center;");
-    VCompras.getChildren().addAll(resumenCompras,rPelicula,rHora,rSala,rAsientos,rFecha,rTotal,graciasCompra);
-cabecera4.getChildren().addAll(VCompras);
-Scene resumenDeCompras = new Scene(cabecera4,500, 200 );
-
-        ventana.show();
+// ahora es parte de la matriz de asientos
     }
     
 
@@ -389,11 +328,21 @@ Scene resumenDeCompras = new Scene(cabecera4,500, 200 );
                     }
                 }
                 Button comprar = new Button("Comprar");
+                /* 
+                HBox fin = new HBox();
+                    VBox graciasVBox = new VBox();
+                        Label graciasLabel = new Label("Gracias por su compra");
+                    graciasVBox.getChildren().addAll(graciasLabel);
+                fin.getChildren().addAll(graciasVBox);
+                Scene gracias = new Scene(fin);
+                */
                 comprar.setOnAction(e -> {
                     if(nAsientos[0]!=0){
                         diasAux[0].funciones[f][c].agregarCompra(new Compra(nAsientos[0], asientosEsc,3000*nAsientos[0]));
                         diasAux[0].funciones[f][c].setSala(asientosAux);
                         diasAux[0].funciones[f][c].actualizarGanancia(3000*nAsientos[0]);
+
+                        //ventanaEmergente.setScene(gracias);
                     }
                 });
             ventEmergVBox.getChildren().addAll(ventELabel, gridPane, comprar);
@@ -403,6 +352,72 @@ Scene resumenDeCompras = new Scene(cabecera4,500, 200 );
         ventanaEmergente.setScene(VEScene);
 
         ventanaEmergente.showAndWait();
+    }
+
+    public void estadisticasEmergente(){
+        Stage estadisticas = new Stage();
+        estadisticas.initModality(Modality.APPLICATION_MODAL);
+        estadisticas.setTitle("Estadisticas");
+
+        HBox stats = new HBox();
+            VBox cuestion = new VBox();
+                Label titulo = new Label("ESTADISTICAS");
+                titulo.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;-fx-alignment: center;");
+
+                GridPane gridStats = new GridPane();
+                gridStats.setHgap(8);
+                gridStats.setVgap(12); 
+                gridStats.setPadding(new Insets(4));
+                // vamos a usar un for a facilitar la repeticion de "total" y "ventas"
+                //renderiza Ventas
+                int[] ventasArray = {3, 6, 9, 12};
+                String k = new String("test");
+                for(int i: ventasArray){
+                    for(int j=1; j<4; j++){
+                        Label ventas = new Label("Ventas: " + k);
+                        gridStats.add(ventas, j, i);
+                    }
+                }
+                // muestrqa total
+                int[] totalArray = {4, 7, 10, 13};
+                for(int i: totalArray){
+                    for(j=1;j<4;j++){
+                        Label total = new Label("Total: " + k);
+                        gridStats.add(total, j, i);
+                    }
+                }
+                //renderiza "sala" y su numero 
+                for(i=1; i<4; i++){
+                    Label sala = new Label("Sala " + i);
+                    sala.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;-fx-alignment: center;");
+                    gridStats.add(sala, i, 0);
+                }
+                int[] horariosAndSalas = {2, 5, 8};
+                String horariosArray[] = {"Matine", "Vermut", "Vespertino"};
+                for(i=0; i<3; i++){
+                    Label horarios = new Label(horariosArray[i]);
+                    gridStats.add(horarios, 0, horariosAndSalas[i]);
+
+                }
+                // total
+                Label total = new Label("TOTAL: " + k);
+                total.setStyle("-fx-font-size: 12px; -fx-font-weight: bold;-fx-alignment: center;");
+                gridStats.add(total, 0, 12);
+                for(i=0;i<3;i++){
+                    for(j=0; j<3;j++){
+                        Label funcionesStats = new Label(k);
+                        gridStats.add(funcionesStats, i+1, horariosAndSalas[j]);
+                    }
+                }
+
+            cuestion.getChildren().addAll(titulo, gridStats);
+        stats.getChildren().addAll(cuestion);
+
+        Scene VEStats = new Scene(stats, 640, 480);
+        estadisticas.setScene(VEStats);
+
+        estadisticas.showAndWait();
+
     }
     //Comentario de prueba
 }
