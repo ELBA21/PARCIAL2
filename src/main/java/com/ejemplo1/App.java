@@ -330,12 +330,33 @@ public class App extends Application {
                         gridPane.getChildren().addAll(asientitos[i][j]);
                     }
                 }
+                // escena final
+                int k = 69; //solo existe con propositos de testing
+                HBox gracias = new HBox();
+                    VBox graciasVBox = new VBox();
+                        Label graciasText = new Label("RESUMEN DE COMPRA");
+                        graciasText.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;-fx-alignment: center;");
+                        Label horario = new Label("horario " + k);
+                        Label sala = new Label("Sala " + k);
+                        Label asientos = new Label("Asientos " + k); // me pregunto si puedo imprimir un array entero
+                        Label fecha = new Label("Fecha " + k); //mas o menos lo mismo
+                        Label total = new Label("Total " + k);
+                        Label graciasPorSuCompra = new Label("GRACIAS POR SU COMPRA!!!!1!");
+                        graciasPorSuCompra.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;-fx-alignment: center;");
+                    graciasVBox.getChildren().addAll(graciasText, horario, sala, asientos, fecha, total, graciasPorSuCompra);
+                gracias.getChildren().addAll(graciasVBox);
+
+                Scene finalScene = new Scene(gracias, 640, 480);
+                //
                 Button comprar = new Button("Comprar");
                 comprar.setOnAction(e -> {
                     if(nAsientos[0]!=0){
                         diasAux[0].funciones[f][c].agregarCompra(new Compra(nAsientos[0], asientosEsc,3000*nAsientos[0]));
                         diasAux[0].funciones[f][c].setSala(asientosAux);
                         diasAux[0].funciones[f][c].actualizarGanancia(3000*nAsientos[0]);
+
+                        ventanaEmergente.setScene(finalScene);
+
                     }
                 });
             ventEmergVBox.getChildren().addAll(ventELabel, gridPane, comprar);
@@ -365,18 +386,18 @@ public class App extends Application {
                 //renderiza Ventas
                 int[] ventasArray = {3, 6, 9, 12};
                 String k = new String("test");
-                for(int i: ventasArray){
-                    for(int j=1; j<4; j++){
+                for(int i=0; i<3; i++){ //antes usaba foreach pero creo que asi sera mas facil en caso de que tengamos que recorer una matriz luego
+                    for(int j=0; j<3; j++){
                         Label ventas = new Label("Ventas: " + k);
-                        gridStats.add(ventas, j, i);
+                        gridStats.add(ventas, j+1, ventasArray[i]);
                     }
                 }
                 // muestrqa total
                 int[] totalArray = {4, 7, 10, 13};
-                for(int i: totalArray){
-                    for(j=1;j<4;j++){
+                for(i=0; i<3; i++){
+                    for(j=0;j<3;j++){
                         Label total = new Label("Total: " + k);
-                        gridStats.add(total, j, i);
+                        gridStats.add(total, j+1, totalArray[i]);
                     }
                 }
                 //renderiza "sala" y su numero 
