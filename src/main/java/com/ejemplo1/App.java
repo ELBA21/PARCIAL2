@@ -36,6 +36,7 @@ public class App extends Application {
     int[] Fecha = new int[3];
     int Precio;
     int i, j;
+    boolean bisiesto;
     @Override
     public void start(Stage ventana) throws IOException {
         ventana.setTitle("ULAGOS CINEMA ULTRA CAPITALISTA");
@@ -71,19 +72,29 @@ public class App extends Application {
                     ComboBox<Integer> comboMes = new ComboBox<>(Mes);
                     comboMes.setPromptText("Selecione el Mes");
                     comboMes.setOnAction(e ->{
-                        Fecha[1] = comboDias.getSelectionModel().getSelectedItem();
+                        Fecha[1] = comboMes.getSelectionModel().getSelectedItem(); // esto estaba asignado a combo dias por alguna razon
                         System.out.println("Mes selecionado: " + Fecha[1]);
                     });
 
                     Label FechaAño = new Label("Año");
-                    ObservableList<Integer> Años = FXCollections.observableArrayList(
-                        2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033);
-                    ComboBox<Integer> comboAño = new ComboBox<>(Años);
+                    ObservableList<Integer> Anos = FXCollections.observableArrayList();
+                    for(int ano=1900; ano<2101; ano++){
+                        Anos.add(ano);
+                    }
+                    ComboBox<Integer> comboAño = new ComboBox<>(Anos);
                     comboAño.setPromptText("Seleccione el año");
                     comboAño.setOnAction( e -> {
                         Fecha[2] = comboAño.getSelectionModel().getSelectedItem();
                         System.out.println("Año seleccionado: "  + Fecha[2]);
+                         if(Fecha[2] % 4 == 0 && (Fecha[2] % 100 != 0 || Fecha[2] % 400 == 0)){
+                        bisiesto = true;
+                        System.err.println("el ano es bisiesto");
+                        }
+                        else{
+                            bisiesto = false;
+                        }
                     });
+                   
                     Fechas.getChildren().addAll(FechaDia, comboDias, FechaMes, comboMes, FechaAño, comboAño);
                 contenedorA1.getChildren().addAll(espacioa1,espacioa2,espacioa3, espacioa4,Fechas);
 
@@ -166,15 +177,20 @@ public class App extends Application {
 
                 cabezera2.getChildren().addAll(gSalas);
             Scene AsignacionPeliculas = new Scene(cabezera2, 900,240);
-            
+
             botonIncio.setOnAction( e -> {
-                if(Fecha[0]!=0 && Fecha[0]!=0 && Fecha[0]!=0 && listaPeliculas.size() != 0){
-                    ArrayList<String> listaPeliculas2 = new ArrayList<>(listaPeliculas);
-                    diasAux[0] = new Dia(Fecha, listaPeliculas2, 3000);         //Se crea el objeto tipo Dia
-                    ventana.setScene(AsignacionPeliculas);
-                }else{
+                System.err.println("check si estan vacios");
+                if(Fecha[0]!=0 && Fecha[1]!=0 && Fecha[2]!=0 && listaPeliculas.size() != 0){ //yandere dev momento
+
+                    
+                        ArrayList<String> listaPeliculas2 = new ArrayList<>(listaPeliculas);
+                        diasAux[0] = new Dia(Fecha, listaPeliculas2 , 3000);         //Se crea el objeto tipo Dia
+                        ventana.setScene(AsignacionPeliculas);
+                }
+                else{
                     // Dar mensaje de error
                 }
+            
             });
 //ESTADÍSTICAS
 //============================================================================
@@ -329,20 +345,21 @@ public class App extends Application {
                 comprar.setOnAction(e -> {
                     if(nAsientos[0]!=0){
                         Compra compra = new Compra(nAsientos[0], asientosEsc,3000*nAsientos[0]);
+                        System.out.println("Compra creada");
                         diasAux[0].funciones[f][c].agregarCompra(compra);
                         diasAux[0].funciones[f][c].setSala(asientosAux);
                         int totalDeComprasFix = diasAux[0].funciones[f][c].getGanancia();
                         diasAux[0].funciones[f][c].actualizarGanancia(3000*nAsientos[0]);
                         // escena final
-                        int k = 69; //solo existe con propositos de testing
                         HBox gracias = new HBox();
                             VBox graciasVBox = new VBox();
                                 Label graciasText = new Label("RESUMEN DE COMPRA");
                                 graciasText.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;-fx-alignment: center;");
                                 Label horario = new Label("horario " + diasAux[0].funciones[f][c].getHorario());
                                 Label sala = new Label("Sala " + diasAux[0].funciones[f][c].getNroSala());
-                                Label asientos = new Label("Asientos " + compra.getAsientos()); // me pregunto si puedo imprimir un array entero
-                                Label fecha = new Label("Fecha " + diasAux[0].getFecha()); //mas o menos lo mismo
+                                Label asientos = new Label("Asientos " + compra.getAsientos()); 
+                                int[] fechaArray = diasAux[0].getFecha();
+                                Label fecha = new Label("Fecha " + fechaArray[0] + "/" + fechaArray[1] + "/" + fechaArray[2]); 
                                 Label total = new Label("Total " + (diasAux[0].funciones[f][c].getGanancia() - totalDeComprasFix));
                                 Label graciasPorSuCompra = new Label("GRACIAS POR SU COMPRA!!!!1!");
                                 graciasPorSuCompra.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;-fx-alignment: center;");
