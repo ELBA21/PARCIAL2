@@ -189,6 +189,7 @@ public class App extends Application {
                 }
                 else{
                     // Dar mensaje de error
+                    fechaError();
                 }
             
             });
@@ -355,12 +356,12 @@ public class App extends Application {
                             VBox graciasVBox = new VBox();
                                 Label graciasText = new Label("RESUMEN DE COMPRA");
                                 graciasText.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;-fx-alignment: center;");
-                                Label horario = new Label("horario " + diasAux[0].funciones[f][c].getHorario());
-                                Label sala = new Label("Sala " + diasAux[0].funciones[f][c].getNroSala());
-                                Label asientos = new Label("Asientos " + compra.getAsientos()); 
+                                Label horario = new Label("   horario " + diasAux[0].funciones[f][c].getHorario());
+                                Label sala = new Label("   Sala " + diasAux[0].funciones[f][c].getNroSala());
+                                Label asientos = new Label("   Asientos " + compra.getAsientos()); 
                                 int[] fechaArray = diasAux[0].getFecha();
-                                Label fecha = new Label("Fecha " + fechaArray[0] + "/" + fechaArray[1] + "/" + fechaArray[2]); 
-                                Label total = new Label("Total " + (diasAux[0].funciones[f][c].getGanancia() - totalDeComprasFix));
+                                Label fecha = new Label("   Fecha " + fechaArray[0] + "/" + fechaArray[1] + "/" + fechaArray[2]); 
+                                Label total = new Label("   Total " + (diasAux[0].funciones[f][c].getGanancia() - totalDeComprasFix));
                                 Label graciasPorSuCompra = new Label("GRACIAS POR SU COMPRA!!!!1!");
                                 graciasPorSuCompra.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;-fx-alignment: center;");
                             graciasVBox.getChildren().addAll(graciasText, horario, sala, asientos, fecha, total, graciasPorSuCompra);
@@ -471,5 +472,36 @@ public class App extends Application {
         estadisticas.showAndWait();
 
     }
+    public void fechaError(){ // error para cuando la fecha no sea correcta o este vacia
+        Stage fechaErrorEmergente = new Stage();
+        fechaErrorEmergente.initModality(Modality.APPLICATION_MODAL);
+        fechaErrorEmergente.setTitle("Estadisticas");
+
+        HBox fechaErrorBox = new HBox();
+        Label fechaInvalida = new Label("  Fecha invalida");
+        fechaInvalida.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;-fx-alignment: center;");
+        fechaErrorBox.getChildren().addAll(fechaInvalida);
+
+        Scene VEFechaError = new Scene(fechaErrorBox, 240, 144);
+        fechaErrorEmergente.setScene(VEFechaError);
+        
+        fechaErrorEmergente.showAndWait();
+    }
+    public void errorPeliculas(){ // error para cuando la lista de peliculas este vacia
+        Stage peliculasErrorEmergente = new Stage();
+        peliculasErrorEmergente.initModality(Modality.APPLICATION_MODAL);
+        peliculasErrorEmergente.setTitle("Estadisticas");
+
+        HBox peliculaErrorBox = new HBox();
+        Label peliculaInvalida = new Label("  Agregue peliculas a la lista");
+        peliculaErrorBox.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;-fx-alignment: center;");
+        peliculaErrorBox.getChildren().addAll(peliculaInvalida);
+
+        Scene VEPeliculaError = new Scene(peliculaErrorBox, 320, 144);
+        peliculasErrorEmergente.setScene(VEPeliculaError);
+        
+        peliculasErrorEmergente.showAndWait();
+    }
+
     //Comentario de prueba
 }
