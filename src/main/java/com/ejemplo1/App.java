@@ -177,19 +177,29 @@ public class App extends Application {
 
                 cabezera2.getChildren().addAll(gSalas);
             Scene AsignacionPeliculas = new Scene(cabezera2, 900,240);
-
+            ObservableList<Integer> mes30 = FXCollections.observableArrayList(4, 6, 9, 11);
+            ObservableList<Integer> mes31 = FXCollections.observableArrayList(1, 3, 5, 7, 8, 10, 12);
             botonIncio.setOnAction( e -> {
                 System.err.println("check si estan vacios");
-                if(Fecha[0]!=0 && Fecha[1]!=0 && Fecha[2]!=0 && listaPeliculas.size() != 0){ //yandere dev momento
-
-                    
+                if(listaPeliculas.size() !=0){ //yandere dev momento
+                    if(Fecha[0]!=0 && Fecha[1]!=0 && Fecha[2]!=0){
+                        if((bisiesto == true && Fecha[1] == 2 && Fecha[0] < 30) ||
+                        (bisiesto == false && Fecha[1] == 2 && Fecha[0] < 29) ||
+                        (mes30.contains(Fecha[1]) && Fecha[0] < 31) ||
+                        (mes31.contains(Fecha[1]) && Fecha[0] < 32)
+                        ){
                         ArrayList<String> listaPeliculas2 = new ArrayList<>(listaPeliculas);
                         diasAux[0] = new Dia(Fecha, listaPeliculas2 , 3000);         //Se crea el objeto tipo Dia
                         ventana.setScene(AsignacionPeliculas);
+                        }
+                        else{
+                            fechaError(); 
+                        }
+                    }
                 }
                 else{
                     // Dar mensaje de error
-                    fechaError();
+                    errorPeliculas();
                 }
             
             });
