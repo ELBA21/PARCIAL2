@@ -31,7 +31,7 @@ public class App extends Application {
     private ObservableList<String> listaPeliculas = FXCollections.observableArrayList(); 
     //Esta es una mauski herramienta misteriosa que usaremos mas tarde AJ
     Dia[] diasAux = new Dia[7];
-
+    String[] horariosSA = {"Matine", "Vermut", "Vespertino"};
     String[][] peliculas = new String[3][3];
     int[] Fecha = new int[3];
     int Precio;
@@ -118,7 +118,7 @@ public class App extends Application {
         
             cabezera.getChildren().addAll(contenedorA1, contenedorA2, contenedorA3);
             HBox.setMargin(botonIncio, new Insets(100,0,0,0));
-            Scene inicio = new Scene(cabezera,500,200);
+            Scene inicio = new Scene(cabezera,500,240);
             ventana.setScene(inicio);
             ventana.show();
             System.out.println("ventana setScene(inicio)");
@@ -127,41 +127,33 @@ public class App extends Application {
 //============================================================================
         HBox cabezera2 = new HBox();
        //nuronyan hizo esto
-            VBox horariosN = new VBox();
-                Label vacioN2 = new Label("         "); //waos esto es estupido, por que no puedo usar el mismo objeto en dos cosas diferentes?
-                Label horario1N = new Label("Matine");
-                horario1N.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
-                
-                Label horario2N = new Label("Vermut");
-                horario2N.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
-                
-                Label horario3N = new Label("Vespertino");
-                horario3N.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
-                Label vacioN3 = new Label(" ");
-                Label vacioN4 = new Label(" ");
-                Label vacioN5 = new Label(" ");
-                //
-                Button botonSiguiente = new Button("Siguiente");
-                
-                //
-                
-                horariosN.getChildren().addAll(vacioN2, horario1N, vacioN3, horario2N, vacioN4, horario3N, vacioN5, botonSiguiente);
+
 
             VBox gSalas = new VBox();
-            Label s1 = new Label("      Sala 1             Sala 2             Sala3");
-            s1.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
             GridPane salas = new GridPane();
             salas.setHgap(8);
             salas.setVgap(12); // intentare utilizar poderes de 2 o numeros similares para todo, se ve mas bonito
             salas.setPadding(new Insets(4));
             salas.setStyle("-fx-background-color: #F6008B;");
+            Button botonSiguiente = new Button("Siguiente");
+            salas.add(botonSiguiente, 3, 5);
+            for(i=0; i<3; i++){
+                Label horariosAP = new Label(horariosSA[i]);
+                horariosAP.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+                salas.add(horariosAP, 0, i+1);
+            }
+            for(i=0; i<3; i++){
+                Label salasAP = new Label("Sala " + (i+1));
+                salasAP.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+                salas.add(salasAP, i+1, 0);
+            }
 
             for (i=0; i<3; i++){
                 for (j=0; j<3; j++){
                     ComboBox<String> comboGrid = new ComboBox<>(listaPeliculas);
                     comboGrid.setPromptText("Seleccionar");
                     comboGrid.setStyle("-fx-prompt-text-fill: gray; -fx-font-size: 12px;");
-                    salas.add(comboGrid, j, i);
+                    salas.add(comboGrid, j+1, i+1);
                     final int fil = i;
                     final int col = j;
                     comboGrid.setOnAction(e ->{
@@ -170,10 +162,10 @@ public class App extends Application {
             }
         }
 
-                gSalas.getChildren().addAll(s1, salas);
+                gSalas.getChildren().addAll(salas);
 
-                cabezera2.getChildren().addAll(horariosN, gSalas);
-            Scene AsignacionPeliculas = new Scene(cabezera2, 500,200);
+                cabezera2.getChildren().addAll(gSalas);
+            Scene AsignacionPeliculas = new Scene(cabezera2, 900,240);
             
             botonIncio.setOnAction( e -> {
                 if(Fecha[0]!=0 && Fecha[0]!=0 && Fecha[0]!=0 && listaPeliculas.size() != 0){
@@ -190,26 +182,29 @@ public class App extends Application {
 //Centro de Compras
 //============================================================================
         HBox cabezera3 = new HBox();
-            VBox horariosN2 = new VBox();
-            Label espacion = new Label(" "); // all my homies hate " "
-            Label matineN = new Label("Matine");
-            Label VermutN = new Label("Vermut");
-            Label VespertinoN = new Label("Vespertino");
-            Button botonStats = new Button("Estadisticas");
-            botonStats.setOnAction(b -> estadisticasEmergente(peliculas));
-            horariosN2.getChildren().addAll(espacion, matineN, VermutN, VespertinoN, botonStats);
-
+            
             VBox losBotones = new VBox();
-            Label salasCC = new Label(" SALA 1 SALA 2  SALA 3");
-
             GridPane botonesCompra = new GridPane();
             botonesCompra.setHgap(8);
             botonesCompra.setVgap(12); // intentare utilizar poderes de 2 o numeros similares para todo, se ve mas bonito
             botonesCompra.setPadding(new Insets(4));
             botonesCompra.setStyle("-fx-background-color: #F6008B;");
+            for(i=0; i<3; i++){
+                Label horariosCC = new Label(horariosSA[i]);
+                horariosCC.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+                botonesCompra.add(horariosCC, 0, i+1);
+            }
+            Button botonStats = new Button("Estadisticas");
+            botonStats.setOnAction(b -> estadisticasEmergente(peliculas));
+            botonesCompra.add(botonStats, 3, 5);
 
+            for(i=0; i<3; i++){
+                Label salaCCLabel = new Label("Sala " + (i+1));
+                salaCCLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+                botonesCompra.add(salaCCLabel, i+1, 0);
+            }
             
-            Scene centroDeCompras = new Scene(cabezera3,500, 200 );
+            Scene centroDeCompras = new Scene(cabezera3,900, 240 );
             
                 botonSiguiente.setOnAction( e -> {  // Se declara accion del boton
                     if(hayVacio(peliculas)){}else{
@@ -219,7 +214,7 @@ public class App extends Application {
                                 final int ifi = i;
                                 final int jfi = j;
                                 Button botonSala = new Button(peliculas[ifi][jfi]);
-                                botonesCompra.add(botonSala, jfi, ifi);  //              ACAAAA ESTABAN DADOS VUELTA EL ifi Y EL jfi LA CTM
+                                botonesCompra.add(botonSala, jfi+1, ifi+1);  //              ACAAAA ESTABAN DADOS VUELTA EL ifi Y EL jfi LA CTM
                                 //
                                 botonSala.setOnAction(a -> abrirVentana(ifi, jfi));
                                 //
@@ -228,8 +223,8 @@ public class App extends Application {
                         }   
                         
 
-                        losBotones.getChildren().addAll(salasCC, botonesCompra);
-                        cabezera3.getChildren().addAll(horariosN2, losBotones);
+                        losBotones.getChildren().addAll(botonesCompra);
+                        cabezera3.getChildren().addAll(losBotones);
                         ventana.setScene(centroDeCompras);
                     }
 
@@ -353,7 +348,7 @@ public class App extends Application {
                             graciasVBox.getChildren().addAll(graciasText, horario, sala, asientos, fecha, total, graciasPorSuCompra);
                         gracias.getChildren().addAll(graciasVBox);
                         //
-                        Scene finalScene = new Scene(gracias, 480, 480);
+                        Scene finalScene = new Scene(gracias, 400, 200);
                         //
                         ventanaEmergente.setScene(finalScene);
 
@@ -362,7 +357,7 @@ public class App extends Application {
             ventEmergVBox.getChildren().addAll(ventELabel, gridPane, comprar);
         nuevaVentana.getChildren().addAll(ventEmergVBox);
         
-        Scene VEScene = new Scene(nuevaVentana, 640, 480);
+        Scene VEScene = new Scene(nuevaVentana, 240, 240);
         ventanaEmergente.setScene(VEScene);
 
         ventanaEmergente.showAndWait();
@@ -385,7 +380,6 @@ public class App extends Application {
                 // vamos a usar un for a facilitar la repeticion de "total" y "ventas"
                 //renderiza Ventas
                 int[] ventasArray = {3, 6, 9, 12};
-                String k = new String("test");
                 for(int i=0; i<3; i++){ //antes usaba foreach pero creo que asi sera mas facil en caso de que tengamos que recorer una matriz luego
                     for(int j=0; j<3; j++){
                         Label ventas = new Label("Ventas: "+ diasAux[0].funciones[i][j].getHistorialCompras().size());
@@ -438,13 +432,14 @@ public class App extends Application {
                     gridStats.add(VentasSalasLabel, i+1, 12);
                 }
                 Label total = new Label("TOTAL: " + totalM);
-                total.setStyle("-fx-font-size: 12px; -fx-font-weight: bold;-fx-alignment: center;");
+                total.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;-fx-alignment: center;");
                 gridStats.add(total, 0, 12);
                 
                 // funcion
                 for(i=0;i<3;i++){
                     for(j=0; j<3;j++){
                         Label funcionesStats = new Label(peliculas[j][i]);
+                        funcionesStats.setStyle("-fx-font-size: 12px; -fx-font-weight: bold;-fx-alignment: center;");
                         gridStats.add(funcionesStats, i+1, horariosAndSalas[j]);
                     }
                 }
@@ -452,7 +447,7 @@ public class App extends Application {
             cuestion.getChildren().addAll(titulo, gridStats);
         stats.getChildren().addAll(cuestion);
 
-        Scene VEStats = new Scene(stats, 480, 480);
+        Scene VEStats = new Scene(stats, 720, 480);
         estadisticas.setScene(VEStats);
 
         estadisticas.showAndWait();
