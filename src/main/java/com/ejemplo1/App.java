@@ -196,7 +196,7 @@ public class App extends Application {
             Label VermutN = new Label("Vermut");
             Label VespertinoN = new Label("Vespertino");
             Button botonStats = new Button("Estadisticas");
-            botonStats.setOnAction(b -> estadisticasEmergente());
+            botonStats.setOnAction(b -> estadisticasEmergente(peliculas));
             horariosN2.getChildren().addAll(espacion, matineN, VermutN, VespertinoN, botonStats);
 
             VBox losBotones = new VBox();
@@ -285,7 +285,7 @@ public class App extends Application {
 
         HBox nuevaVentana = new HBox();
             VBox ventEmergVBox = new VBox();
-                Label ventELabel = new Label("ete sech el pepe");
+                Label ventELabel = new Label("Seleccion de Asientos");
                 // toggle buttons
                 GridPane gridPane = new GridPane(); // Quien fue el vio que hizo esto?????
                     gridPane.setHgap(5); // Espacio horizontal entre las celdas
@@ -329,31 +329,32 @@ public class App extends Application {
                         gridPane.getChildren().addAll(asientitos[i][j]);
                     }
                 }
-                // escena final
-                int k = 69; //solo existe con propositos de testing
-                HBox gracias = new HBox();
-                    VBox graciasVBox = new VBox();
-                        Label graciasText = new Label("RESUMEN DE COMPRA");
-                        graciasText.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;-fx-alignment: center;");
-                        Label horario = new Label("horario " + k);
-                        Label sala = new Label("Sala " + k);
-                        Label asientos = new Label("Asientos " + k); // me pregunto si puedo imprimir un array entero
-                        Label fecha = new Label("Fecha " + k); //mas o menos lo mismo
-                        Label total = new Label("Total " + k);
-                        Label graciasPorSuCompra = new Label("GRACIAS POR SU COMPRA!!!!1!");
-                        graciasPorSuCompra.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;-fx-alignment: center;");
-                    graciasVBox.getChildren().addAll(graciasText, horario, sala, asientos, fecha, total, graciasPorSuCompra);
-                gracias.getChildren().addAll(graciasVBox);
-
-                Scene finalScene = new Scene(gracias, 640, 480);
-                //
+                
                 Button comprar = new Button("Comprar");
                 comprar.setOnAction(e -> {
                     if(nAsientos[0]!=0){
                         diasAux[0].funciones[f][c].agregarCompra(new Compra(nAsientos[0], asientosEsc,3000*nAsientos[0]));
                         diasAux[0].funciones[f][c].setSala(asientosAux);
+                        int totalDeComprasFix = diasAux[0].funciones[f][c].getGanancia();
                         diasAux[0].funciones[f][c].actualizarGanancia(3000*nAsientos[0]);
-
+                        // escena final
+                        int k = 69; //solo existe con propositos de testing
+                        HBox gracias = new HBox();
+                            VBox graciasVBox = new VBox();
+                                Label graciasText = new Label("RESUMEN DE COMPRA");
+                                graciasText.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;-fx-alignment: center;");
+                                Label horario = new Label("horario " + diasAux[0].funciones[f][c].getHorario());
+                                Label sala = new Label("Sala " + diasAux[0].funciones[f][c].getNroSala());
+                                Label asientos = new Label("Asientos " + k); // me pregunto si puedo imprimir un array entero
+                                Label fecha = new Label("Fecha " + diasAux[0].getFecha()); //mas o menos lo mismo
+                                Label total = new Label("Total " + (diasAux[0].funciones[f][c].getGanancia() - totalDeComprasFix));
+                                Label graciasPorSuCompra = new Label("GRACIAS POR SU COMPRA!!!!1!");
+                                graciasPorSuCompra.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;-fx-alignment: center;");
+                            graciasVBox.getChildren().addAll(graciasText, horario, sala, asientos, fecha, total, graciasPorSuCompra);
+                        gracias.getChildren().addAll(graciasVBox);
+                        //
+                        Scene finalScene = new Scene(gracias, 480, 480);
+                        //
                         ventanaEmergente.setScene(finalScene);
 
                     }
@@ -367,7 +368,7 @@ public class App extends Application {
         ventanaEmergente.showAndWait();
     }
 
-    public void estadisticasEmergente(){
+    public void estadisticasEmergente(String[][] peliculas){
         Stage estadisticas = new Stage();
         estadisticas.initModality(Modality.APPLICATION_MODAL);
         estadisticas.setTitle("Estadisticas");
@@ -413,12 +414,37 @@ public class App extends Application {
 
                 }
                 // total
-                Label total = new Label("TOTAL: " + k);
+                int totalM = 0;
+                for(i=0; i<3; i++){
+                    for(j=0;j<3;j++){
+                        totalM = totalM +diasAux[0].funciones[i][j].getGanancia();
+                    }
+                }
+                int[] totalSalas = {0, 0, 0}; 
+                int[] ventasSalas = {0, 0, 0}; //creo que esto es redundante pero igual
+                for(i=0;i<3;i++){
+                    for(j=0;j<3;j++){
+                        totalSalas[i] = totalSalas[i] + diasAux[0].funciones[j][i].getGanancia();
+                    }
+                    Label totalSalasLabel = new Label("Total " + totalSalas[i]);
+                    gridStats.add(totalSalasLabel, i+1, 13);
+                }
+                //ventasTotalSalas
+                for(i=0;i<3;i++){
+                    for(j=0;j<3;j++){
+                        ventasSalas[i] = ventasSalas[i] + diasAux[0].funciones[j][i].getHistorialCompras().size();
+                    }
+                    Label VentasSalasLabel = new Label("Ventas " + ventasSalas[i]);
+                    gridStats.add(VentasSalasLabel, i+1, 12);
+                }
+                Label total = new Label("TOTAL: " + totalM);
                 total.setStyle("-fx-font-size: 12px; -fx-font-weight: bold;-fx-alignment: center;");
                 gridStats.add(total, 0, 12);
+                
+                // funcion
                 for(i=0;i<3;i++){
                     for(j=0; j<3;j++){
-                        Label funcionesStats = new Label(k);
+                        Label funcionesStats = new Label(peliculas[j][i]);
                         gridStats.add(funcionesStats, i+1, horariosAndSalas[j]);
                     }
                 }
@@ -426,7 +452,7 @@ public class App extends Application {
             cuestion.getChildren().addAll(titulo, gridStats);
         stats.getChildren().addAll(cuestion);
 
-        Scene VEStats = new Scene(stats, 640, 480);
+        Scene VEStats = new Scene(stats, 480, 480);
         estadisticas.setScene(VEStats);
 
         estadisticas.showAndWait();
