@@ -328,7 +328,8 @@ public class App extends Application {
                 Button comprar = new Button("Comprar");
                 comprar.setOnAction(e -> {
                     if(nAsientos[0]!=0){
-                        diasAux[0].funciones[f][c].agregarCompra(new Compra(nAsientos[0], asientosEsc,3000*nAsientos[0]));
+                        Compra compra = new Compra(nAsientos[0], asientosEsc,3000*nAsientos[0]);
+                        diasAux[0].funciones[f][c].agregarCompra(compra);
                         diasAux[0].funciones[f][c].setSala(asientosAux);
                         int totalDeComprasFix = diasAux[0].funciones[f][c].getGanancia();
                         diasAux[0].funciones[f][c].actualizarGanancia(3000*nAsientos[0]);
@@ -340,7 +341,7 @@ public class App extends Application {
                                 graciasText.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;-fx-alignment: center;");
                                 Label horario = new Label("horario " + diasAux[0].funciones[f][c].getHorario());
                                 Label sala = new Label("Sala " + diasAux[0].funciones[f][c].getNroSala());
-                                Label asientos = new Label("Asientos " + k); // me pregunto si puedo imprimir un array entero
+                                Label asientos = new Label("Asientos " + compra.getAsientos()); // me pregunto si puedo imprimir un array entero
                                 Label fecha = new Label("Fecha " + diasAux[0].getFecha()); //mas o menos lo mismo
                                 Label total = new Label("Total " + (diasAux[0].funciones[f][c].getGanancia() - totalDeComprasFix));
                                 Label graciasPorSuCompra = new Label("GRACIAS POR SU COMPRA!!!!1!");
