@@ -208,7 +208,6 @@ public class App extends Application {
             botonesCompra.setPadding(new Insets(4));
             botonesCompra.setStyle("-fx-background-color: #F6008B;");
 
-            int[] ij = {0, 0}; 
             
             Scene centroDeCompras = new Scene(cabezera3,500, 200 );
             
@@ -220,7 +219,7 @@ public class App extends Application {
                                 final int ifi = i;
                                 final int jfi = j;
                                 Button botonSala = new Button(peliculas[ifi][jfi]);
-                                botonesCompra.add(botonSala, ifi, jfi);
+                                botonesCompra.add(botonSala, jfi, ifi);  //              ACAAAA ESTABAN DADOS VUELTA EL ifi Y EL jfi LA CTM
                                 //
                                 botonSala.setOnAction(a -> abrirVentana(ifi, jfi));
                                 //
@@ -388,7 +387,7 @@ public class App extends Application {
                 String k = new String("test");
                 for(int i=0; i<3; i++){ //antes usaba foreach pero creo que asi sera mas facil en caso de que tengamos que recorer una matriz luego
                     for(int j=0; j<3; j++){
-                        Label ventas = new Label("Ventas: " + k);
+                        Label ventas = new Label("Ventas: "+ diasAux[0].funciones[i][j].getHistorialCompras().size());
                         gridStats.add(ventas, j+1, ventasArray[i]);
                     }
                 }
@@ -396,7 +395,7 @@ public class App extends Application {
                 int[] totalArray = {4, 7, 10, 13};
                 for(i=0; i<3; i++){
                     for(j=0;j<3;j++){
-                        Label total = new Label("Total: " + k);
+                        Label total = new Label("Total: " + diasAux[0].funciones[i][j].getGanancia());
                         gridStats.add(total, j+1, totalArray[i]);
                     }
                 }
