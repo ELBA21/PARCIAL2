@@ -2,10 +2,10 @@ package com.ejemplo1;
 import java.util.ArrayList;
 
 public class Dia {
-    int[] fecha;//[3]
-    Funcion[][] funciones = new Funcion[3][3];
-    ArrayList<String> peliculas = new ArrayList<>();
-    int precio;
+    private int[] fecha;//[3]
+    private Funcion[][] funciones = new Funcion[3][3];
+    private ArrayList<String> peliculas = new ArrayList<>();
+    private int precio;
 
     public Dia(int[] fecha, ArrayList<String> peliculas, int precio){
         this.fecha = fecha;
@@ -58,5 +58,8 @@ public class Dia {
     }
     public ArrayList<String> getPeliculas(){
         return this.peliculas;
+    }
+    public Funcion[][] getFunciones(){
+        return this.funciones;
     }
 }

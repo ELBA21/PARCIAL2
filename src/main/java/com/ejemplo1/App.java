@@ -298,7 +298,7 @@ public class App extends Application {
         int[][] asientosAux = new int[5][5];
         int[] nAsientos = {0};
         ArrayList<String> asientosEsc = new ArrayList<>();
-        copiaMatriz(asientosAux, diasAux[0].funciones[f][c].getSala());
+        copiaMatriz(asientosAux, diasAux[0].getFunciones()[f][c].getSala());
         //asientosAux[2][2]=1;
 
         Stage ventanaEmergente = new Stage();
@@ -357,21 +357,21 @@ public class App extends Application {
                     if(nAsientos[0]!=0){
                         Compra compra = new Compra(nAsientos[0], asientosEsc,3000*nAsientos[0]);
                         System.out.println("Compra creada");
-                        diasAux[0].funciones[f][c].agregarCompra(compra);
-                        diasAux[0].funciones[f][c].setSala(asientosAux);
-                        int totalDeComprasFix = diasAux[0].funciones[f][c].getGanancia();
-                        diasAux[0].funciones[f][c].actualizarGanancia(3000*nAsientos[0]);
+                        diasAux[0].getFunciones()[f][c].agregarCompra(compra);
+                        diasAux[0].getFunciones()[f][c].setSala(asientosAux);
+                        int totalDeComprasFix = diasAux[0].getFunciones()[f][c].getGanancia();
+                        diasAux[0].getFunciones()[f][c].actualizarGanancia(3000*nAsientos[0]);
                         // escena final
                         HBox gracias = new HBox();
                             VBox graciasVBox = new VBox();
                                 Label graciasText = new Label("RESUMEN DE COMPRA");
                                 graciasText.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;-fx-alignment: center;");
-                                Label horario = new Label("   horario " + diasAux[0].funciones[f][c].getHorario());
-                                Label sala = new Label("   Sala " + diasAux[0].funciones[f][c].getNroSala());
+                                Label horario = new Label("   horario " + diasAux[0].getFunciones()[f][c].getHorario());
+                                Label sala = new Label("   Sala " + diasAux[0].getFunciones()[f][c].getNroSala());
                                 Label asientos = new Label("   Asientos " + compra.getAsientos()); 
                                 int[] fechaArray = diasAux[0].getFecha();
                                 Label fecha = new Label("   Fecha " + fechaArray[0] + "/" + fechaArray[1] + "/" + fechaArray[2]); 
-                                Label total = new Label("   Total " + (diasAux[0].funciones[f][c].getGanancia() - totalDeComprasFix));
+                                Label total = new Label("   Total " + (diasAux[0].getFunciones()[f][c].getGanancia() - totalDeComprasFix));
                                 Label graciasPorSuCompra = new Label("GRACIAS POR SU COMPRA!!!!1!");
                                 graciasPorSuCompra.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;-fx-alignment: center;");
                             graciasVBox.getChildren().addAll(graciasText, horario, sala, asientos, fecha, total, graciasPorSuCompra);
@@ -411,7 +411,7 @@ public class App extends Application {
                 int[] ventasArray = {3, 6, 9, 12};
                 for(int i=0; i<3; i++){ //antes usaba foreach pero creo que asi sera mas facil en caso de que tengamos que recorer una matriz luego
                     for(int j=0; j<3; j++){
-                        Label ventas = new Label("Ventas: "+ diasAux[0].funciones[i][j].getHistorialCompras().size());
+                        Label ventas = new Label("Ventas: "+ diasAux[0].getFunciones()[i][j].getHistorialCompras().size());
                         gridStats.add(ventas, j+1, ventasArray[i]);
                     }
                 }
@@ -419,7 +419,7 @@ public class App extends Application {
                 int[] totalArray = {4, 7, 10, 13};
                 for(i=0; i<3; i++){
                     for(j=0;j<3;j++){
-                        Label total = new Label("Total: " + diasAux[0].funciones[i][j].getGanancia());
+                        Label total = new Label("Total: " + diasAux[0].getFunciones()[i][j].getGanancia());
                         gridStats.add(total, j+1, totalArray[i]);
                     }
                 }
@@ -440,14 +440,14 @@ public class App extends Application {
                 int totalM = 0;
                 for(i=0; i<3; i++){
                     for(j=0;j<3;j++){
-                        totalM = totalM +diasAux[0].funciones[i][j].getGanancia();
+                        totalM = totalM +diasAux[0].getFunciones()[i][j].getGanancia();
                     }
                 }
                 int[] totalSalas = {0, 0, 0}; 
                 int[] ventasSalas = {0, 0, 0}; //creo que esto es redundante pero igual
                 for(i=0;i<3;i++){
                     for(j=0;j<3;j++){
-                        totalSalas[i] = totalSalas[i] + diasAux[0].funciones[j][i].getGanancia();
+                        totalSalas[i] = totalSalas[i] + diasAux[0].getFunciones()[j][i].getGanancia();
                     }
                     Label totalSalasLabel = new Label("Total " + totalSalas[i]);
                     gridStats.add(totalSalasLabel, i+1, 13);
@@ -455,7 +455,7 @@ public class App extends Application {
                 //ventasTotalSalas
                 for(i=0;i<3;i++){
                     for(j=0;j<3;j++){
-                        ventasSalas[i] = ventasSalas[i] + diasAux[0].funciones[j][i].getHistorialCompras().size();
+                        ventasSalas[i] = ventasSalas[i] + diasAux[0].getFunciones()[j][i].getHistorialCompras().size();
                     }
                     Label VentasSalasLabel = new Label("Ventas " + ventasSalas[i]);
                     gridStats.add(VentasSalasLabel, i+1, 12);
