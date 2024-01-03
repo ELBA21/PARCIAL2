@@ -243,7 +243,7 @@ public class App extends Application {
                                 Button botonSala = new Button(peliculas[ifi][jfi]);
                                 botonesCompra.add(botonSala, jfi+1, ifi+1);  //              ACAAAA ESTABAN DADOS VUELTA EL ifi Y EL jfi LA CTM
                                 //
-                                botonSala.setOnAction(a -> abrirVentana(ifi, jfi));
+                                botonSala.setOnAction(a -> abrirVentana(ifi, jfi, peliculas));
                                 //
 
                             }
@@ -294,7 +294,7 @@ public class App extends Application {
         }
     }
 
-    public void abrirVentana(int f, int c){
+    public void abrirVentana(int f, int c, String[][] peliculas){
         int[][] asientosAux = new int[5][5];
         int[] nAsientos = {0};
         ArrayList<String> asientosEsc = new ArrayList<>();
@@ -303,7 +303,7 @@ public class App extends Application {
 
         Stage ventanaEmergente = new Stage();
         ventanaEmergente.initModality(Modality.APPLICATION_MODAL);           
-        ventanaEmergente.setTitle("Andres, oh dios mio");
+        ventanaEmergente.setTitle(peliculas[f][c]);
 
         HBox nuevaVentana = new HBox();
             VBox ventEmergVBox = new VBox();
